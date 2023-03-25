@@ -1,24 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/routing/ProtectedRoute";
+import PrivateRoute from "./components/routing/PrivateRoute";
+import { publicRoutes, privateRoutes, protectedRoutes } from './components/routing'
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App ">
+      
+        <Routes>
+          {
+            publicRoutes.map((route, index) => {
+              const Page = route.component  
+              const Layout = route.layout
+              return (
+                <Route key={index} path={route.path} 
+                  element={
+                    <Layout>
+                      <Page/>
+                    </Layout>
+                  }
+                />
+              )
+            })
+          }
+       
+          {
+            protectedRoutes.map((route, index) => {
+              const Page = route.component
+              const Layout = route.layout
+              return (
+                <Route key={index} path={route.path} 
+                  element={
+                    <ProtectedRoute 
+                      Component={<Layout>
+                        <Page/>
+                      </Layout>}/>
+                  }
+                />
+              )
+            })
+          }
+
+          {
+            privateRoutes.map((route, index) => {
+              const Page = route.component
+              const Layout = route.layout
+              return (
+                <Route key={index} path={route.path} 
+                  element={
+                    <PrivateRoute Component={<Layout>
+                      <Page/>
+                    </Layout>}/>
+                  }
+                />
+              )
+            })
+          }
+        </Routes>
+      
+      
     </div>
+    
   );
 }
 

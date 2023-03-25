@@ -1,0 +1,102 @@
+.wrapper {
+    width: 320px;
+    height: 100vh;
+    position: relative;
+
+    .container {
+        position: fixed;
+        height: 100%;
+        left: 0;
+        width: 280px;
+        .logo {
+            display: flex;
+           
+            align-items: center;
+            height: 72px;
+            justify-content: space-around;
+            img {
+                height: 42px;
+            }
+
+            svg {
+                font-size: 18px;
+            }
+        }
+        ul {
+            padding: 10px 20px;
+            margin: 0;
+            li {
+                padding: 12px 20px;
+                font-size: 16px;
+                border-radius: 8px;
+                flex-wrap:nowrap;
+
+                a {
+                    display: flex;
+                }
+
+                &:hover {
+                    background-color: rgb(246 246 248);
+                }
+                svg {
+                    width: 50px;
+                }
+            }
+        }
+    }
+
+    
+}
+
+.wrapper.open {
+
+    .container {
+        animation: openKeyFrames 0.2s linear;
+    @keyframes openKeyFrames {
+        from {
+            margin-left: -320px;
+        }
+        to {margin-left: 0px;}
+    }
+    }
+    animation: openKeyFrames 0.2s linear;
+    @keyframes openKeyFrames {
+        from {
+            margin-left: -320px;
+        }
+        to {margin-left: 0px;}
+    }
+
+}
+
+.wrapper.close {
+    width: 50px;
+    animation: closeKeyFrames 0.2s linear;
+    .container {
+        width: 50px;
+    }
+    .logo {
+        img {
+            display: none;
+        }
+    }
+
+    ul {
+        padding: 0;
+        li {
+            padding: 15px 0;
+            span {
+                display: none;
+            }
+
+            svg {
+                font-size: 18px; 
+            }
+        }
+    }
+
+    @keyframes closeKeyFrames {
+        from {width: 320px;}
+        to {width: 50px;}
+    }
+}

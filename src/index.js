@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import GlobalStyles from './components/GlobalStyles';
 import reportWebVitals from './reportWebVitals';
+import NavContextProvider from './contexts/NavContext';
+import MovieContextProvider from './contexts/MovieContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <GlobalStyles>
+        <NavContextProvider>
+          <MovieContextProvider>
+          <App />  
+          </MovieContextProvider>
+        </NavContextProvider>
+      </GlobalStyles>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

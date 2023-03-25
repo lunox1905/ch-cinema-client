@@ -1,0 +1,70 @@
+.wrapper {
+
+    width: 56%;
+    padding: 25px;
+    margin: 0 auto;
+    background-color: white;
+    top: 100px;
+    left: 50px;
+    min-height: 400px;
+    right: 0;
+    position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 16px;
+    svg {
+        float: right;
+    }
+    .container {
+        width: 100%;
+        padding: 0px;
+        z-index: 100;
+        padding: 80px;
+        span {
+            display: inline-block;
+            width: 150px;
+        }
+
+        .title {
+            display: flex;
+          
+        }
+
+        .item-detail {
+            margin: 4px 0;
+
+            div {
+                display: flex;
+            }
+        }
+
+        
+        input {
+            width: 360px;
+            height: 36px;
+            border: 1px solid rgb(130, 130, 205);
+            padding: 0 16px;
+            border-radius: 8px;
+            margin: 8px 0;
+
+            &:focus {
+                border: 2px solid blue;
+            }
+        }
+
+        .list-phuThuoc {
+            button {
+                margin: 8px 0; 
+            }
+        }
+        
+    }
+
+    .option {
+        margin: 50px 0 0 0;
+        button {
+            font-size: 15px;
+            padding: 8px 24px;
+        }
+    }
+}
+

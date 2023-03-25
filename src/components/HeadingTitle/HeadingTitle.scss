@@ -1,0 +1,17 @@
+.heading-title {
+    position: relative;
+    font-size: 22px;
+    margin: 0px 0 18px 0;
+    font-weight: 500;
+    display: inline-block;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 40px;
+        height: 2px;
+        bottom: -10px;
+        background-color: orange;
+    }
+}
