@@ -29,7 +29,7 @@ function Header() {
                 <ul className={cx('nav-primary')}>
                 {
                         navState.menu.map((nav, index) => (
-                            <li key={index}>
+                            <li className={cx('menu-primary')} key={index}>
                                 <Link to={'/' + nav.slug}>
                                     {nav.title}
                                 </Link>

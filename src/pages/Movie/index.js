@@ -66,7 +66,7 @@ function Home () {
                                         <button onClick={() => setShowListRating(true)}>Đánh giá</button>
                                         <Rating show={showListRating}/>
                                     </div>
-                                    <InfoMovie title={<FaClock/>} content={movie?.duration}/>
+                                    <InfoMovie title={<FaClock/>} content={movie?.duration + ' phút'}/>
                                     <InfoMovie title={'Thể loại'} content={movie?.category}/>
                                     <InfoMovie title={'Quốc gia'} content={movie?.country}/>
                                     <InfoMovie title={'Đạo diễn'} content={movie?.director}/>

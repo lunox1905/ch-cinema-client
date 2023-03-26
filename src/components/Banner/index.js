@@ -2,7 +2,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import "./Banner.scss"
 import { URL } from '../../contexts/constants';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, meno } from 'react';
 import Loading from '../Loading';
 import { Link } from 'react-router-dom';
 const Banner = () => {
@@ -43,4 +43,4 @@ const Banner = () => {
     )
 }
 
-export default Banner
+export default memo(Banner)

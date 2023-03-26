@@ -1,4 +1,4 @@
-import { UPDATE_MOVIE, GET_ALL_MOVIE, GET_MOVIE, ADD_MOVIE} from "../contexts/constants"
+import { UPDATE_MOVIE, GET_ALL_MOVIE, GET_MOVIE, ADD_MOVIE, DELETE_MOVIE} from "../contexts/constants"
 
 export const movieReducer = (state, action) => {
     const { type, payload} = action
@@ -16,16 +16,22 @@ export const movieReducer = (state, action) => {
         case ADD_MOVIE:
             return {
                 ...state,
-                movies: payload
+                movies: [...state.movies, payload]
             }
         case UPDATE_MOVIE:
-            const newMovie = state.movie.map(movie =>
+            const newMovie = state.movies.map(movie =>
                 movie._id === payload._id ? payload : movie
             )
 
             return {
                 ...state,
                 movies: newMovie
+            }
+        case DELETE_MOVIE:
+            return {
+                ...state,
+                
+                movies: state.movies.filter(movie => movie._id !== payload)
             }
         default:
             return {

@@ -2,26 +2,32 @@ import classNames from "classnames/bind";
 import styles from './SideBar.module.scss'
 import Image from "../Image";
 import { Link } from "react-router-dom";
-import { FaHome, FaBars } from 'react-icons/fa'
+import { FaBars, FaFilm, FaElementor, FaImage, FaRegChartBar } from 'react-icons/fa'
 import { useState } from "react";
 const cx = classNames.bind(styles)
 
 function SideBar () {
     const menu = [
         {
-            title: 'Home',
+            title: 'DashBoard',
             link: '/',
-            icon: <FaHome/>
+            icon: <FaRegChartBar/>
+        },
+    
+        {
+            title: 'Movie',
+            link: '/manager/movie',
+            icon: <FaFilm/>
         },
         {
-            title: 'Home',
-            link: '/',
-            icon: <FaHome/>
+            title: 'Menu',
+            link: '/manager/menu',
+            icon: <FaElementor/>
         },
         {
-            title: 'Home',
-            link: '/',
-            icon: <FaHome/>
+            title: 'Banner',
+            link: '/manager/banner',
+            icon: <FaImage/>
         },
     ]
 
@@ -42,8 +48,6 @@ function SideBar () {
                                     <Link to={menu.link}>
                                         {menu.icon}
                                         <span>{menu.title}</span>
-                                       
-
                                     </Link>
                                 </li>
                             ))

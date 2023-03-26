@@ -7,7 +7,7 @@
         position: fixed;
         height: 100%;
         left: 0;
-        width: 280px;
+        padding: 0 22px;
         .logo {
             display: flex;
            
@@ -33,6 +33,7 @@
 
                 a {
                     display: flex;
+                    align-items: center;
                 }
 
                 &:hover {
@@ -52,12 +53,12 @@
 
     .container {
         animation: openKeyFrames 0.2s linear;
-    @keyframes openKeyFrames {
-        from {
-            margin-left: -320px;
+        @keyframes openKeyFrames {
+            from {
+                margin-left: -320px;
+            }
+            to {margin-left: 0px;}
         }
-        to {margin-left: 0px;}
-    }
     }
     animation: openKeyFrames 0.2s linear;
     @keyframes openKeyFrames {
@@ -74,6 +75,7 @@
     animation: closeKeyFrames 0.2s linear;
     .container {
         width: 50px;
+        padding: 0;
     }
     .logo {
         img {

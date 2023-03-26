@@ -26,7 +26,7 @@ function Rating ({show}) {
     }
 
     const handleClick = (e) => {
-        console.log(e)
+        
 
     }
     return (
