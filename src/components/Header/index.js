@@ -21,7 +21,7 @@ function Header() {
                 <div className={cx('auth')}>
                     <div className={cx('aut')}>
                         <i class="fas fa-user-alt"></i>
-                        <span>Đăng nhập</span>
+                        <span> Đăng nhập</span>
                     </div>
                 </div>
             </div>
