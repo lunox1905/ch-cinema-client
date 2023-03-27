@@ -22,7 +22,7 @@ export const publicRoutes = [
     {path: '/manager/addmovie', component: AddMovie, layout: ManagerLayout},
     {path: '/manager/detailmovie/:slug', component: Detail, layout: ManagerLayout},
     {path: '/manager/editmovie/:slug', component: EditMovie, layout: ManagerLayout},
-    {path: '/manager/banner', component: Banner, layout: ManagerLayout},
+    {path: '/manager/banner', component: Banner,  layout: ManagerLayout},
 ]
 
 export const protectedRoutes = [
