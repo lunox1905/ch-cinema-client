@@ -6,6 +6,9 @@ import GlobalStyles from './components/GlobalStyles';
 import reportWebVitals from './reportWebVitals';
 import NavContextProvider from './contexts/NavContext';
 import MovieContextProvider from './contexts/MovieContext';
+import AuthContextProvider from './contexts/AuthContext';
+import CinemaContextProvider from './contexts/CinemaContext';
+import ShowTimeProvider from './contexts/ShowTimeContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +17,13 @@ root.render(
       <GlobalStyles>
         <NavContextProvider>
           <MovieContextProvider>
-          <App />  
+            <AuthContextProvider>
+              <CinemaContextProvider>
+                <ShowTimeProvider>
+                  <App />  
+                </ShowTimeProvider>
+              </CinemaContextProvider>
+            </AuthContextProvider>
           </MovieContextProvider>
         </NavContextProvider>
       </GlobalStyles>
@@ -22,7 +31,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

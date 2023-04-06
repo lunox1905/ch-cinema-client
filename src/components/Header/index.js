@@ -1,13 +1,18 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss'
 import { NavContext } from '../../contexts/NavContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Auth from '../Auth'
+import { AuthContext } from '../../contexts/AuthContext';
 
 const cx = classNames.bind(styles)
 
 function Header() {
+
     const { navState } = useContext(NavContext)
+    const { authState: { user }, logoutUser } = useContext(AuthContext)
+    const [ showAuth, setShowAuth ] = useState(false)
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -19,9 +24,31 @@ function Header() {
                     <i class="fas fa-search"></i>
                 </div>
                 <div className={cx('auth')}>
-                    <div className={cx('aut')}>
+                    <div className={cx('auth-box')}>
                         <i class="fas fa-user-alt"></i>
-                        <span>Đăng nhập</span>
+                        {
+                            user ? (
+                                <>
+                                    <span>{user.username}</span>
+                                    <ul className={cx('option')}>
+                                        {user?.role === 'admin' ? (
+                                            <li>
+                                                <Link to={'/profile'}>Tài khoản</Link>
+                                                <Link to={'/manager/movie'}>Quản lý</Link>
+                                            </li>
+                                        ) : (
+                                            <li>
+                                                <Link to={'/profile'}>Tài khoản</Link>
+                                            </li>
+                                        )}
+                                        <li onClick={() => logoutUser()}>Thoát</li>
+                                    </ul>
+                                </>
+                            ) : (
+                                <span onClick={() => setShowAuth(true)}>Đăng nhập</span>
+                            )
+                        }
+                        
                     </div>
                 </div>
             </div>
@@ -53,6 +80,7 @@ function Header() {
                     }
                 </ul>
             </div>
+            {showAuth && <Auth setShow={setShowAuth}/>}
         </div>
     )
 }

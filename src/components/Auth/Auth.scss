@@ -1,0 +1,82 @@
+.wrapper-auth {
+    padding: 10px 20px;
+    .container-alert {
+       
+        width: 556px;
+        margin: 0 auto;
+        position: fixed;
+        top: 100px;
+        left: 0;
+        right: 0;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 20px;
+        z-index: 90;
+
+        .container-auth {
+            margin: 10px 0;
+
+            .box {
+                display: flex;
+                margin-bottom: 30px;
+                h1 {
+                    margin: 0 10px;
+                    position: relative;
+                    cursor: pointer;
+                    &::after {
+                        content: '';
+                        display: none;
+                        position: absolute;
+                        bottom: -10px;
+                        right: 0;
+                        left: 0;
+                        height: 2px;
+                        background-color: var(--primary-color);
+                    }
+                    &.active {
+                        color: var(--primary-color);
+
+                        &::after {
+                            display: block;
+                          
+                        }
+                    }
+                }
+            }
+
+            select, input {
+                width: 100%;
+                border: 1px solid rgb(225 219 219);
+                height: 36px;
+                margin: 10px 0;
+                padding: 5px 10px;
+                outline: none;
+            }
+            button {
+                width: 100%;
+                margin: 25px 0 10px 0;
+                color: white;
+                font-size: 18px;
+                height: 46px;
+                background-color: var(--primary-color);
+            }
+
+            span {
+                font-size: 14px;
+                color: red;
+            }
+        }
+    } 
+}
+
+.overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: black;
+    opacity: 0.4;
+    overflow: auto;
+}

@@ -1,25 +1,21 @@
 import classNames from "classnames/bind";
 import styles from './EditMenu.module.scss';
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { NavContext } from "../../../contexts/NavContext";
 import { Button } from 'react-bootstrap'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles)
 
 function EditMenu () {
     const { navState: {menu}, editMenu } = useContext(NavContext)
-    
+    const navigate = useNavigate()
     const params = useParams()
-    const content = menu.filter(menu => menu._id === params.slug)
-   
+    const content = menu.find(menu => menu._id === params.slug)
+    console.log(content)
     
-    const [ phuThuoc, setPhuThuoc ] = useState(content.phuThuoc ? content[0].phuThuoc : null)
-    const [ title, setTitle] = useState(content.title ? content[0].title : '')
-    if(content.phuThuoc) {
-        console.log(content)
-        setPhuThuoc(content[0].phuThuoc)
-        setTitle(content[0].title)
-    }
+    const [ phuThuoc, setPhuThuoc ] = useState(content.phuThuoc ? content.phuThuoc : null)
+    const [ title, setTitle] = useState(content.title ? content.title : '')
+
     const updatePhuThuoc = index => e => {
 
         let newArr = [...phuThuoc]; 
@@ -35,14 +31,15 @@ function EditMenu () {
             phuThuoc: phuThuoc
         }
 
-        editMenu(menu)
+        editMenu(menu, params.slug)
+        navigate(-1)
     }
     return (
         <div className={cx('wrapper')}>
     
             <div className={cx('container')}>
            
-                <input value={title} onChange={e => {setTitle(e.target.value)}} placeholder="Menu chính"/>
+                <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Menu chính"/>
 
                 <div className={cx('list-phuThuoc')}>
                 {
@@ -78,7 +75,7 @@ function EditMenu () {
             <span id='err' style={{color: 'red'}}></span>
             <div className={cx('option')}>
               
-                <Button size="lg" variant="outline-primary" onClick={handleSubmit}>Thêm menu</Button>
+                <Button size="lg" variant="outline-primary" onClick={handleSubmit}>Sửa menu</Button>
              
             </div>
 

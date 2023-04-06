@@ -19,14 +19,15 @@
             }
 
             svg {
+                margin-left: 54px;
                 font-size: 18px;
             }
         }
         ul {
-            padding: 10px 20px;
+            padding: 10px;
             margin: 0;
             li {
-                padding: 12px 20px;
+                padding: 12px 0px;
                 font-size: 16px;
                 border-radius: 8px;
                 flex-wrap:nowrap;
@@ -80,6 +81,9 @@
     .logo {
         img {
             display: none;
+        }
+        svg {
+            margin: 0;
         }
     }
 

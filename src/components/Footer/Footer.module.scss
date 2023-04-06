@@ -1,0 +1,44 @@
+.wrapper {
+    width: 100%;
+    margin-top: 50px;
+    background-color: #1a1a1a;
+    .container {
+        width: 96%;
+        margin: 40px auto;
+
+        h1 {
+            font-size: 21px;
+            position: relative;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 0 15px 15px;
+            &::after {
+                content: '';
+                position: absolute;
+                width: 4px;
+                background-color: #f16b38;
+                bottom: 0;
+                top: 0;
+                left: -15px;
+            }
+        }
+
+        ul {
+            padding: 10px 0;
+            li {
+                font-size: 14px;
+                padding: 5px 0;
+                a {
+                    color: #a0a3a7;
+
+                    &:hover {
+                        color: orange;
+                    }
+
+                    svg {
+                        font-size: 26px;
+                    }
+                }
+            }
+        }
+    }
+}

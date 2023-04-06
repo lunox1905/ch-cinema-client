@@ -26,7 +26,6 @@ function ManagerMovie() {
         setLoading(true)
         deleteMovie({id: e.target.closest('button').value})
             .then(res => {
-                console.log(res)
                 if(res.success) {
                     setLoading(false)
                 }
@@ -66,7 +65,6 @@ function ManagerMovie() {
                                 <td>{movies.title}</td>
                                 <td>{movies.duration + ' phút'}</td>
                                 <td>
-                                    
                                     <Link to={'/manager/detailmovie/' + movies.slug} >
                                     <FaEye color="green"/>
                                     </Link>

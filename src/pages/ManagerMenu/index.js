@@ -7,21 +7,28 @@ import { FiSearch } from 'react-icons/fi'
 import { FaPlus, FaPen, FaTrash, FaEye } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Detail from "./Detail";
-
+import Loading from "../../components/Loading";
 const cx = classNames.bind(styles)
 
 function ManagerMenu () {
 
    
-    const { navState: {menu} } = useContext(NavContext)
+    const { navState: {menu}, deleteMenu } = useContext(NavContext)
     const [search, setSeatch] = useState('')
     const [detail, setDetail] = useState(null)
-    var menuFilter = menu
-    if(search !== null) {
-        menuFilter = menu.filter((item) => {
-            return item.title.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-          });
+    const [loading, setLoading] = useState(false)
+   
+    const handleDelete = (e) => {
+        setLoading(true)
+        deleteMenu({id: e.target.closest('button').value})
+            .then(res => {
+                if(res) {
+                    setLoading(false)
+                }
+            })
     }
+
+    if(loading) return <Loading/>
 
     return (
         <div className={cx('wrapper')}>
@@ -37,7 +44,7 @@ function ManagerMenu () {
                 </Button>
             </div>
             <div className={cx('container')}>
-               <Table striped  hover>
+               <Table striped hover>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -47,10 +54,8 @@ function ManagerMenu () {
                         </tr>
                     </thead>
                     <tbody>
-                    
                     {
-                        menuFilter.map((menu, index) => (
-                                    
+                        menu?.map((menu, index) => (           
                             <tr>
                                 <td>{index}</td>
                                 <td>{menu.title}</td>
@@ -60,22 +65,17 @@ function ManagerMenu () {
                                     <Link to={'/manager/menu/edit/' + menu._id} >
                                         <FaPen color="blue"/>
                                     </Link>
-                                    
-                                    <FaTrash color="red" />
-                                  
-                                    
+                                    <button value={menu._id}>
+                                        <FaTrash color="red" onClick={handleDelete}/>   
+                                    </button>   
                                 </td>
                             </tr>
                         ))
                     }
-                    
-                    
                     </tbody>
                </Table>
-              
             </div>
             <Detail menu={detail}/>
-            
         </div>
     )
 }

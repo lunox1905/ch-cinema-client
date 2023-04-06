@@ -2,7 +2,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import "./Banner.scss"
 import { URL } from '../../contexts/constants';
 import axios from 'axios';
-import { useEffect, useState, meno } from 'react';
+import { useEffect, useState, memo } from 'react';
 import Loading from '../Loading';
 import { Link } from 'react-router-dom';
 const Banner = () => {
@@ -23,7 +23,7 @@ const Banner = () => {
     if(loading) return <Loading />
 
     return (
-        <Carousel>
+        <Carousel interval={2000}>
             {
                 slides.map((slide) => (
                     <Carousel.Item interval={2000}>

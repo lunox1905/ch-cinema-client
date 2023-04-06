@@ -3,6 +3,7 @@ import styles from './AddMenu.module.scss';
 import { useState, useContext } from "react";
 import { NavContext } from "../../../contexts/NavContext";
 import { Button } from 'react-bootstrap'
+import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(styles)
 
 function AddMenu () {
@@ -10,6 +11,7 @@ function AddMenu () {
     const [ phuThuoc, setPhuThuoc ] = useState([])
     const [ title, setTitle] = useState('')
     const { addMenu } = useContext(NavContext)
+    const navigate = useNavigate()
     const updatePhuThuoc = index => e => {
 
         let newArr = [...phuThuoc]; 
@@ -26,6 +28,7 @@ function AddMenu () {
         }
 
         addMenu(menu)
+        navigate('/manager/menu')
     }
     return (
         <div className={cx('wrapper')}>

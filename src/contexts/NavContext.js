@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect } from 'react'
 import { navReducer } from '../store/navReducer'
 import axios from 'axios'
-import { GET_MENU, ADD_MENU, URL, UPDATE_MENU} from './constants'
+import { GET_MENU, ADD_MENU, URL, UPDATE_MENU, DELETE_MENU} from './constants'
 
 export const NavContext = createContext()
 
@@ -54,7 +54,21 @@ const NavContextProvider = ({children}) => {
 		}
 	}
 
-    const NavContextData = { getMenu, addMenu, editMenu, navState}
+	const deleteMenu = async (id) => {
+		try {
+		
+			const res = await axios.post(`http://${URL}/deletemenu`, id)
+			
+			if(res.data.success) {
+				dispatch({type: DELETE_MENU, payload: id})
+				return res.data.success
+			}
+		} catch {
+			
+		}
+	}
+
+    const NavContextData = { getMenu, addMenu, editMenu, deleteMenu, navState}
     return (
         <NavContext.Provider value={NavContextData}>
             {children}

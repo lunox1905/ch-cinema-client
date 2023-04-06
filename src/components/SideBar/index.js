@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from './SideBar.module.scss'
 import Image from "../Image";
 import { Link } from "react-router-dom";
-import { FaBars, FaFilm, FaElementor, FaImage, FaRegChartBar } from 'react-icons/fa'
+import { FaBars, FaFilm, FaElementor, FaImage, FaRegChartBar, FaUniversity, FaRegCalendarAlt } from 'react-icons/fa'
 import { useState } from "react";
 const cx = classNames.bind(styles)
 
@@ -28,6 +28,16 @@ function SideBar () {
             title: 'Banner',
             link: '/manager/banner',
             icon: <FaImage/>
+        },
+        {
+            title: 'Rạp chiếu phim',
+            link: '/manager/cinema',
+            icon: <FaUniversity/>
+        },
+        {
+            title: 'Lịch chiếu',
+            link: '/manager/showtime',
+            icon: <FaRegCalendarAlt/>
         },
     ]
 

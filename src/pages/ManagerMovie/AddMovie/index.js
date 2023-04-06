@@ -2,13 +2,14 @@ import classNames from "classnames/bind";
 import styles from './AddMovie.module.scss';
 import { useState, useContext, useEffect } from "react";
 import { MovieContext } from "../../../contexts/MovieContext";
-import { Button, Col, Row, Container } from 'react-bootstrap'
-import { FaCalendar, FaCalendarAlt, FaWindowClose } from "react-icons/fa";
+import { Button, Col, Row, Container, Form } from 'react-bootstrap'
+import { FaCalendar, FaWindowClose } from "react-icons/fa";
 import { URL } from "../../../contexts/constants";
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+
 const cx = classNames.bind(styles)
 
 function AddMovie () {
@@ -43,11 +44,12 @@ function AddMovie () {
         });
     }, [])
 
-    
+
+    const [validated, setValidated] = useState(false);
 
     const updateMovie = e => {
         setMovie({...movie, [e.target.name]: e.target.value});
-      }
+    }
     
     const updateCalendar = e => {
         const d = new Date(e)
@@ -69,65 +71,95 @@ function AddMovie () {
         setCast(newArray);
     }
 
-    const handleSubmit = () => {
-        const categorys = document.querySelectorAll(`.${cx('inputCategory')}`)
-        const submit = movie
-        categorys.forEach((category, index) => {
-            if(category.checked) {
-                submit.category.push(category.value)
-            }
-        })
-        submit.cast = cast;
-        addMovie(submit)
-        navigate(-1)
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        } else {
+            const categorys = document.querySelectorAll(`.${cx('inputCategory')}`)    
+            const submit = movie
+            categorys.forEach((category, index) => {
+                if(category.checked) {
+                    submit.category.push(category.value)
+                }
+            })
+            submit.cast = cast;
+            addMovie(submit)
+            
+            navigate(-1)
+        }
+        setValidated(true);
+    };
 
-    }
     return (
         <div className={cx('wrapper')}>
     
             <Container>
+                <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Row>
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Tên phim</span>
-                            <input value={movie.title} placeholder="Tên phim" name="title" onChange={updateMovie}/>
+                            <input className="form-control" value={movie.title} placeholder="Tên phim" name="title" onChange={updateMovie} required/>
+                            <Form.Control.Feedback type="invalid">
+                                Không được để trống phần này
+                            </Form.Control.Feedback>
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Tên phim tiếng việt</span>
-                            <input value={movie.titleVi} placeholder="Tên phim tiếng việt" name="titleVi" onChange={updateMovie}/>
+                            <input className="form-control"value={movie.titleVi} placeholder="Tên phim tiếng việt" name="titleVi" onChange={updateMovie} required/>
+                            <Form.Control.Feedback type="invalid">
+                                Không được để trống phần này
+                            </Form.Control.Feedback>
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Thời lượng</span>
-                            <input value={movie.duration} placeholder="Thời lượng" name="duration" onChange={updateMovie}/>
+                            <input className="form-control"value={movie.duration} placeholder="Thời lượng" name="duration" onChange={updateMovie} required/>
+                            <Form.Control.Feedback type="invalid">
+                                Không được để trống phần này
+                            </Form.Control.Feedback>
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Đạo diễn</span>
-                            <input value={movie.director} placeholder="Đạo diễn" name="director" onChange={updateMovie}/>
+                            <input className="form-control"value={movie.director} placeholder="Đạo diễn" name="director" onChange={updateMovie} required/>
+                            <Form.Control.Feedback type="invalid">
+                                Không được để trống phần này
+                            </Form.Control.Feedback>
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Nhà sản xuất</span>
                             <input value={movie.producer} placeholder="Nhà sản xuất" name="producer" onChange={updateMovie}/>
+                            <Form.Control.Feedback type="invalid">
+                                Không được để trống phần này
+                            </Form.Control.Feedback>
                         </div>
                     </Col>
                     
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Image</span>
-                            <input value={movie.image} placeholder="Image" name="image" onChange={updateMovie}/>
+                            <input className="form-control"value={movie.image} placeholder="Image" name="image" onChange={updateMovie} required/>
+                            <Form.Control.Feedback type="invalid">
+                                Không được để trống phần này
+                            </Form.Control.Feedback>
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Trailer</span>
-                            <input value={movie.trailer} placeholder="Trailer" name="trailer" onChange={updateMovie}/>
+                            <input className="form-control"value={movie.trailer} placeholder="Trailer" name="trailer" onChange={updateMovie} required/>
+                            <Form.Control.Feedback type="invalid">
+                                Không được để trống phần này
+                            </Form.Control.Feedback>
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -136,7 +168,7 @@ function AddMovie () {
                             {
                                 cast.map((item, index) => (
                                     <div className={cx('box')}>
-                                    <input value={item} placeholder="Tên diễn viên" onChange={updateCast(index)}/> 
+                                    <input className="form-control"value={item} placeholder="Tên diễn viên" onChange={updateCast(index)}/> 
                                     {
                                         index + 1 === cast.length ? (
                                             
@@ -188,7 +220,7 @@ function AddMovie () {
                         <div className={cx('item')}>
                             <span>Ngày khởi chiếu</span>
                             <div className={cx('box')}>
-                                <input value={movie.premiereDate}/>
+                                <input className="form-control"value={movie.premiereDate} required/>
                                 <FaCalendar onClick={() => setShowCalendar(true)}/>
                             </div>
                             <div className={cx('calendar')} style={showCalendar ? {display: 'block'} : {display: 'none'}} >
@@ -206,10 +238,12 @@ function AddMovie () {
                     </Col>
                 </Row>
                 
+                
                 <div className={cx('option')}>      
-                    <Button size="lg" variant="outline-primary" onClick={handleSubmit}>Thêm menu</Button>
+                    <Button size="lg" variant="outline-primary" type="submit">Thêm phim</Button>
                     <span id='err' style={{color: 'red'}}></span>
                 </div>
+                </Form>
             </Container>
         </div>
     )

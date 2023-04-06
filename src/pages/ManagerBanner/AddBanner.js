@@ -2,9 +2,34 @@ import { Alert } from "react-bootstrap"
 import classNames from "classnames/bind"
 import styles from './ManagerMovie.module.scss'
 import { Container, Col, Row, Button } from 'react-bootstrap';
+import { URL } from "../../contexts/constants";
+import { useState } from "react";
+import axios from "axios";
 
 const cx = classNames.bind(styles)
-function AddBanner ({setShow, title}) {
+function AddBanner ({ setShow, title, setLoading}) {
+
+    const [ banner, setBanner ] = useState({
+        image:'',
+        link: ''
+    })
+    const handleChange =(e) => {
+        setBanner({...banner, [e.target.name]: e.target.value});
+    }
+
+    const submit = () => {
+        setLoading(true)
+        axios.post(`http://${URL}/addbanner/`, banner)
+        .then(response => {
+            if(response.data.success) {
+                setLoading(false)
+                setShow(false)
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
     return (
         <div className={cx('alert-banner')}>
             
@@ -14,16 +39,16 @@ function AddBanner ({setShow, title}) {
                         <p>{title}</p>
                         
                             <Row>
-                                <Col lg={6}>
-                                    <input placeholder="Dường dẫn ảnh"/>
+                                <Col lg={12}>
+                                    <input placeholder="Dường dẫn ảnh" name="image" value={banner.image} onChange={handleChange}/>
                                 </Col>  
-                                <Col lg={6}>
-                                    <input placeholder="Path"/>
+                                <Col lg={12}>
+                                    <input placeholder="Path" name="link" value={banner.link} onChange={handleChange}/>
                                 </Col>
                             
                             </Row>
                         
-                        <Button variant="primary">Thêm</Button>
+                        <Button variant="primary" onClick={submit}>Thêm</Button>
 
                     </Container>
                 </div>

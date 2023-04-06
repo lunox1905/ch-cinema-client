@@ -1,4 +1,4 @@
-import { UPDATE_MENU } from "../contexts/constants"
+import { DELETE_MENU, UPDATE_MENU } from "../contexts/constants"
 
 export const navReducer = (state, action) => {
     const { type, payload} = action
@@ -11,7 +11,7 @@ export const navReducer = (state, action) => {
         case 'ADD_MENU':
             return {
                 ...state,
-                menu: payload
+                menu: [...state.menu, payload]
             }
         case UPDATE_MENU:
             const newCart = state.menu.map(menu =>
@@ -21,6 +21,12 @@ export const navReducer = (state, action) => {
             return {
                 ...state,
                 menu: newCart
+            }
+        case DELETE_MENU:
+            return {
+                ...state,
+                
+                menu: state.menu.filter(menu => menu._id !== payload.id)
             }
         default:
             return {

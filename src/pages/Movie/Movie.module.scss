@@ -49,7 +49,7 @@
             margin: 10px 0;
             svg {
                 font-size: 22px;
-                color: yellow;
+                color: var(--primary-color);
             }
             
             .score {
@@ -67,7 +67,7 @@
             }
 
             button {
-                background-color: orange;
+                background-color: var(--primary-color);
                 color: white;
                 width: 78px;
                 height: 30px;
@@ -87,7 +87,7 @@
         
                     &.active {
                         svg {
-                            color: yellow;
+                            color: var(--primary-color);
                         }
                     }
                 }
