@@ -1,0 +1,214 @@
+.wrapper {
+    width: 82%;
+    margin: 0px auto;
+
+    .image {
+        position: relative;
+        width: 254px;
+        height: 350px;
+        button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 1px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.7;
+            background-color: rgba(0, 0, 0, 0.7);
+
+            svg {
+                color: white;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .detail-movie {
+        padding: 0 10px;
+        h2 {
+            font-size: 28px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        h2:nth-child(2) {
+            color: #898686;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            svg {
+                font-size: 22px;
+                color: var(--primary-color);
+            }
+            
+            .score {
+
+                margin: 0 5px;
+                p {
+                    margin: 0;
+                    font-size: 17px;
+                }
+
+                p:last-child {
+                    font-size: 13px;
+                    color: #898686;
+                }
+            }
+
+            button {
+                background-color: var(--primary-color);
+                color: white;
+                width: 78px;
+                height: 30px;
+                margin: 0 10px;
+                font-size: 14px;
+            }
+
+            .option-rating {
+                display: flex;
+                margin: 0 0 4px 0px;
+                padding: 0;
+                li {
+                    svg {
+                        font-size: 15px;
+                        color: #ccc;
+                    }
+        
+                    &.active {
+                        svg {
+                            color: var(--primary-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .infoMovie {
+        display: flex;
+        font-size: 15px;
+        margin: 6px 0;
+        p {
+            margin: 0 2px;
+        }
+        div {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        span {
+            color: #898686;
+            margin-right: 10px;
+            min-width: 75px;
+        }
+    }
+
+    .trailer {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        div {
+            padding: 0;
+        }
+        .ytb {
+            padding: 15px;
+        }
+
+        p {
+            position: relative;
+            text-align: center;
+            font-size: 17px;
+            margin: 10px 0;
+            &::after {
+                content: '';
+                position: absolute;
+                height: 1px;
+                bottom: -10px;
+                right: 0;
+                left: 0;
+                background-color: #ccc;
+            }
+        }
+    }
+
+    .content {
+        margin: 18px 0;
+        p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+    }  
+
+    .movie-other {
+        display: flex;
+        justify-content: center;
+        .container-other {
+            width: 290px;
+        }
+        .box-other {
+            margin: 10px 0;
+        }
+    }
+    
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    select, .option_calendar {
+        width: 30%;  
+        border: 1px solid #ccc;
+        padding: 6px 12px;
+        margin-right: 40px;
+        display: flex;
+        position: relative;
+        display: flex;
+        align-items: center;
+        svg {
+            position: absolute;
+            right: 10px;
+        }
+
+        .calendar {
+            position: absolute;
+            right: 0;
+            top: 55px;
+        }
+
+        input {
+            padding: 0 4px;
+        }
+    }
+
+    .option_calendar {
+        display: flex;
+        position: relative;
+        display: flex;
+        align-items: center;
+        svg {
+            position: absolute;
+            right: 10px;
+        }
+
+        .calendar {
+            position: absolute;
+            right: 0;
+            top: 55px;
+        }
+    }
+}

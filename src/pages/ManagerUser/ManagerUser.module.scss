@@ -1,0 +1,123 @@
+.wrapper {
+    width: 100%;
+    .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 25px;
+        .search {
+            display: flex;
+            align-items: center;
+            height: 40px;
+            width: 320px;
+            padding: 0 16px;
+            border: 1px solid rgb(149, 149, 223);
+            border-radius: 8px;
+            font-size: 15px;
+           
+            input {
+                margin: 0 8px;
+            }
+        }
+    }
+    button {
+        display: flex;
+        align-items: center;
+        padding: 6px 15px;
+        font-size: 14px;
+        color: white;
+    }
+    .container {
+        padding: 0;
+
+        table {
+            
+            td, th {
+                padding: 15px 15px 15px 24px;
+                font-size: 15px;
+
+                a {
+                    margin-right: 30px;
+                }
+
+                button {
+                    margin-right: 30px;
+                }
+
+                img {
+                    height: 50px;
+                }
+            }
+            
+        }
+    }
+
+    .alert-wrapper {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: white;
+
+        input {
+            width: 100%;
+            height: 36px;
+            border: 1px solid rgb(130, 130, 205);
+            padding: 0 16px;
+            border-radius: 8px;
+            margin: 8px 0;
+
+            &:focus {
+                border: 2px solid blue;
+            }
+        }
+
+        button {
+            margin: 20px 0 0 0;
+            padding: 5px 15px;
+            font-size: 14px;
+        }
+        .detail_item {
+            display: flex;
+            margin: 10px 0;
+            align-items: center;
+            span {
+                width: 150px;
+            }
+            input {
+                width: 12px;
+                height: 12px;
+            }
+            p {
+                margin: 0 10px;
+            }
+        }
+        h4 {
+            position: relative;
+            text-align: center;
+            font-size: 17px;
+            margin: 10px 0;
+            &::after {
+                content: '';
+                position: absolute;
+                height: 1px;
+                bottom: -10px;
+                right: 0;
+                left: 0;
+                background-color: #1a1010;
+            }
+        }
+    }
+    .container_updaterole {
+        select {
+            width: 120px;
+            height: 30px;
+            border-radius: 4px;
+            margin: 0 30px;
+        }
+    }
+}
+

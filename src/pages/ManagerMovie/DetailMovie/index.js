@@ -63,13 +63,6 @@ function EditMovie () {
                             <p>{movies.producer}</p>
                         </div>
                     </Col>
-                    
-                    <Col lg={6}>
-                        <div className={cx('item')}>
-                            <span>Image</span>
-                            <img src={movies.image} alt='image poster'/>
-                        </div>
-                    </Col>
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Trailer</span>
@@ -112,6 +105,18 @@ function EditMovie () {
                         <div className={cx('item')}>
                             <span>Ngày khởi chiếu</span>
                             <p>{movies.premiereDate}</p>
+                        </div>
+                    </Col>
+                    <Col lg={6}>
+                        <div className={cx('item')}>
+                            <span>Image</span>
+                            <img src={movies.image} alt='image poster'/>
+                        </div>
+                    </Col>
+                    <Col lg={6}>
+                        <div className={cx('item')}>
+                            <span>Trạng thái</span>
+                            {movies.state ? <p>Phim đang được chiếu</p> : <p>Phim không còn được chiếu</p>}
                         </div>
                     </Col>
                     <Col lg={12}>

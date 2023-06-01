@@ -1,0 +1,46 @@
+.wrapper {
+    width: 100%;
+    margin: 40px 0;
+    .header {
+        width: 32%;
+        background-color: var(--primary-color);
+        padding: 6px 12px;
+        border-left: 6px solid black;
+        h2 {
+            color: white;
+            margin: 0;
+            font-size: 19px;
+        }
+    }
+    .container {
+        border: 1px solid rgb(183 177 177);
+        width: 100%;
+        padding: 35px 20px;
+        display: flex;
+        align-items: center;
+        ul {
+            display: flex;
+            align-items: center;
+            margin: 0 50px;
+            padding: 0 20px;
+            li {
+                border: 1px solid rgb(183 177 177);
+                padding: 0 10px;
+                margin: 0 5px;
+                cursor: pointer;
+
+                &:hover {
+                    border-color: orange;
+                    color: var(--primary-color);
+                    a {
+                        color: var(--primary-color);
+                    }
+                }
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+}

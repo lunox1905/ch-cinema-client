@@ -41,7 +41,7 @@ function Register({setShow}) {
         if(register.repassword.trim()) {
           register.password.trim() !== register.repassword.trim() && (val.repassword = "Nhập lại mật khẩu không chính xác")
         } else {
-          val.password = 'Không được để trống mật khẩu'
+          val.repassword = 'Không được để trống mật khẩu'
         }
 
         if(!register.username) val.username = 'Không được để họ tên'
@@ -91,16 +91,16 @@ function Register({setShow}) {
                     <span>{err?.email}</span>
                 </Col>  
                 <Col lg={6}>
-                    <input placeholder="Mật khẩu" name="password" value={register.password} onChange={handleChange}/>
+                    <input placeholder="Mật khẩu" name="password" type="password" value={register.password} onChange={handleChange}/>
                     <span>{err?.password}</span>
                 </Col>
                 <Col lg={6}>
-                    <input placeholder="Xác nhận mật khẩu" name="repassword" value={register.repassword} onChange={handleChange}/>
+                    <input placeholder="Xác nhận mật khẩu" type="password" name="repassword" value={register.repassword} onChange={handleChange}/>
                     <span>{err?.repassword}</span>
                 </Col>
             </Row>
             
-            <button onClick={submit}>Đăng nhập</button>
+            <button onClick={submit}>Đăng ký</button>
         </Container>
     )
 }

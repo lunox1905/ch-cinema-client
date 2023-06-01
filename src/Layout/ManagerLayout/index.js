@@ -9,7 +9,7 @@ function Manager ({ children }) {
         <div className={cx('wrapper')}>
             <SideBar/>
             <div className={cx('container')}> 
-                <HeaderManager/>  
+                <HeaderManager/> 
                 <div className={cx('content')}>
                     {children}
                 </div>

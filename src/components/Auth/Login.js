@@ -53,7 +53,7 @@ function Login({setShow}) {
                     {err.email && <span>{err.email}</span>}
                 </Col>  
                 <Col lg={12}>
-                    <input placeholder="Mật khẩu" name="password" value={login.password} onChange={handleChange}/>
+                    <input placeholder="Mật khẩu" name="password" type="password" value={login.password} onChange={handleChange}/>
                     <span>{err?.password}</span>
                 </Col>
             

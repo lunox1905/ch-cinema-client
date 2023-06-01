@@ -54,6 +54,7 @@
 
     .container {
         animation: openKeyFrames 0.2s linear;
+        
         @keyframes openKeyFrames {
             from {
                 margin-left: -320px;
@@ -79,6 +80,7 @@
         padding: 0;
     }
     .logo {
+        justify-content: center;
         img {
             display: none;
         }

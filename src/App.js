@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/routing/ProtectedRoute";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import PageNotFound from './components/Notfound'
 import { publicRoutes, privateRoutes, protectedRoutes } from './components/routing'
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     <div className="App ">
       
         <Routes>
-          {
+        {
             publicRoutes.map((route, index) => {
               const Page = route.component  
               const Layout = route.layout
@@ -57,6 +58,7 @@ function App() {
               )
             })
           }
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       
       

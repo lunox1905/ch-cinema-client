@@ -1,118 +1,48 @@
 import classNames from "classnames/bind";
 import styles from './Movie.module.scss'
+import Banner from "../../components/Banner";
 import { MovieContext } from '../../contexts/MovieContext';
-import { useContext, useEffect, useState } from "react";
-import { Container, Row, Col, Breadcrumb } from 'react-bootstrap';
-import { useParams } from "react-router-dom";
-import { FaClock, FaPlay, FaStar } from "react-icons/fa";
-import InfoMovie from './InfoMovie'
-import Loading from '../../components/Loading'
-import Trailer from "./Trailer";
-import HeadingTitle from "../../components/HeadingTitle";
+import { useContext, useState } from "react";
+import { Container, Row, Col} from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import MovieItem from "../../components/MovieItem";
-import Rating from "./Rating";
 
 const cx = classNames.bind(styles)
 
-function Home () {
-    const [show, setShow] = useState(false);
-    const [showListRating, setShowListRating] = useState(false);
-    const { movieState: { movie, movies }, getMovie} = useContext(MovieContext)
-    const params = useParams()
-    const [ loading, setLoading ] = useState(true)
-    useEffect(() => {
-        getMovie(params.slug)
-        setLoading(false)
-    }, [params.slug, getMovie])
+function Movie () {
 
-    const handleDate = (date) => {
-        const d = new Date(date)
-        return  `${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`
-    }
-
-    if(loading) {
-        return <Loading/>
-    }
+    const { movieState: { movies }} = useContext(MovieContext)
+    const [ stateMovie, setStateMovie ] = useState(true) 
+   
+    const moviesFilter = movies.filter((movie) => {
+        const now = new Date()
+        const date = new Date(movie.premiereDate.toString())
+        return (now > date) === stateMovie && movie.state
+    })
     return (
         <div className={cx('wrapper')}>
-            
-            <Container>
-                <Breadcrumb style={{"--cui-breadcrumb-divider": "'';"}}>
-                    <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-                    <Breadcrumb.Item href="/">Đặt vé</Breadcrumb.Item>
-                    <Breadcrumb.Item active>{movie?.title}</Breadcrumb.Item>
-                </Breadcrumb>
-                <Row>
-                    <Col lg='8'>
-                        <Row>
-                            <Col lg='4'>
-                                <div className={cx('image')}>
-                                    <img src={movie?.image} alt='image'/>
-                                    <button onClick={() => setShow(true)}>
-                                        <FaPlay />
-                                    </button>
-                                </div>
-                            </Col>
-                            <Col lg='8'>
-                                <div className={cx('detail-movie')}>
-                                    <h2>{movie?.title}</h2>
-                                    <h2 className={cx('titlevi')}>{movie?.titleVi}</h2>
-                                    <div className={cx('rating')}>
-                                        <FaStar/>
-                                        <div className={cx('score')}>
-                                            <p>7.8/10</p>
-                                            <p>10</p>
-                                        </div>
-                                        <button onClick={() => setShowListRating(true)}>Đánh giá</button>
-                                        <Rating show={showListRating}/>
-                                    </div>
-                                    <InfoMovie title={<FaClock/>} content={movie?.duration + ' phút'}/>
-                                    <InfoMovie title={'Thể loại'} content={movie?.category}/>
-                                    <InfoMovie title={'Quốc gia'} content={movie?.country}/>
-                                    <InfoMovie title={'Đạo diễn'} content={movie?.director}/>
-                                    <InfoMovie title={'Diễn viên'} content={movie?.cast}/>
-                                    <InfoMovie title={'Nhà sản xuất'} content={movie?.producer}/>
-                                    <InfoMovie title={'Ngày khởi chiếu'} content={handleDate(movie?.premiereDate)}/>
-                                </div>
-                            </Col>
-                        </Row>
-                        <div className={cx('content')}>
-                            <HeadingTitle title={'NỘI DUNG'}/>
-                            <p>{movie?.description}</p>
-                        </div>
-
-                        <div className={cx('show-time')}>
-                            <HeadingTitle title={'LỊCH CHIẾU'}/>
-                        </div>
-                    </Col>
-                    <Col lg='4'>
-                        <div className={cx('movie-other')}>
-                            <div className={cx('container-other')}>
-                                <HeadingTitle title={'PHIM ĐANG CHIẾU'}/>
-                                <div className={cx('box-other')}>
-                                    <Row md={12}>
-                                        {
-                                            movies.map(movie => (
-                                                <MovieItem movie={movie} width={'254px;'} height={'350px;'}/>
-                                            )) 
-                                            
-                                        }
-                                        
-                                    </Row>
-                                </div>
-                            </div>
-                        </div>
-                    </Col>
-                </Row>
-                
-            </Container>
-            {
-                show ?  <Trailer link={movie?.trailer} setShow={setShow} title={movie?.title}/> : <></>
-            }
-            
+            <div className={cx('container')}> 
+                <div className={cx('option')}>
+                    <ul>
+                        <li onClick={() => setStateMovie(true)} className={stateMovie === true ? cx('active') : null}>PHIM ĐANG CHIẾU</li>
+                        <li onClick={() => setStateMovie(false)} className={stateMovie === false ? cx('active') : null}>PHIM SẮP CHIẾU</li>
+                    </ul>
+                </div>
+                <Container>
+                    <Row md={4}>
+                        {
+                            moviesFilter ? moviesFilter.map(movie => (
+                                <Col>
+                                    <MovieItem movie={movie}/>
+                                </Col>
+                            )) : <></>   
+                        }
+                    </Row>
+                </Container>
+            </div>
             
         </div>
     )
 }
 
-export default Home
+export default Movie

@@ -23,6 +23,8 @@
             background-color: white;
             font-size: 14px;
             padding: 4px 5px 4px 15px;
+            display: flex;
+            align-items: center;
             input {
                 width: 230px;
                 height: 100%;
@@ -32,12 +34,13 @@
 
             i {
                 color: #ccc;
+                margin: 0 0 0 5px;
             }
         }
 
         .auth {
             font-size: 14px;
-            color: #ccc;
+            color: #6e6767;
             cursor: pointer;
             span {
                 margin: 0 5px;
@@ -60,6 +63,7 @@
                     padding: 8px 0px;
                     background-color: white;
                     z-index: 900;
+                    min-width: 120px;
 
                     li {
                         padding: 5px 20px;

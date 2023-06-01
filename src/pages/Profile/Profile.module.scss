@@ -5,7 +5,14 @@
         font-size: 20px;
         position: relative;
         display: inline-block;
-        margin: 10px 0 40px 0;
+        margin: 10px 20px 40px 0;
+        cursor: pointer;
+    }
+    thead {
+        background-color: #47251c;
+        color: white;
+    }
+    .active {
         &::after {
             content: '';
             position: absolute;
@@ -56,16 +63,21 @@
             font-size: 13px;
         }
     }
-
+    table {
+        td {
+            vertical-align: middle;
+        }
+    }
     
-
-    button {
-        font-family: revert;
-        width: 88px;
-        height: 42px;
-        background-color: var(--primary-color);
-        font-size: 15px;
-        color: white;
-        margin: 15px 0;
+    .wrapper-pass {
+        button {
+            font-family: revert;
+            width: 88px;
+            height: 42px;
+            background-color: var(--primary-color);
+            font-size: 15px;
+            color: white;
+            margin: 15px 0;
+        }
     }
 }

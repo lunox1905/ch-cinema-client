@@ -20,7 +20,9 @@ function Header() {
                     <img src={require('../../assets/images/logo3.png')} alt='logo'></img>
                 </div>
                 <div className={cx('search')}>
-                    <input placeholder='Tìm tên phim, diễn viên...'/>
+                    <form class="form-inline my-2 my-lg-0" action="/search">
+                        <input placeholder='Tìm tên phim, diễn viên...' name='title' type='search'/>
+                    </form>
                     <i class="fas fa-search"></i>
                 </div>
                 <div className={cx('auth')}>
@@ -32,10 +34,14 @@ function Header() {
                                     <span>{user.username}</span>
                                     <ul className={cx('option')}>
                                         {user?.role === 'admin' ? (
-                                            <li>
-                                                <Link to={'/profile'}>Tài khoản</Link>
-                                                <Link to={'/manager/movie'}>Quản lý</Link>
-                                            </li>
+                                            <>
+                                                <li>
+                                                    <Link to={'/profile'}>Tài khoản</Link> 
+                                                </li>
+                                                <li>
+                                                    <Link to={'/manager'}>Quản lý</Link>
+                                                </li>
+                                            </>
                                         ) : (
                                             <li>
                                                 <Link to={'/profile'}>Tài khoản</Link>

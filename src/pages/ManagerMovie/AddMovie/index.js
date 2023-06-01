@@ -25,13 +25,17 @@ function AddMovie () {
         premiereDate: '',
         trailer: '',
         image: '',
-        category: []
+        category: [],
     })
+    const [ stateMovie, setStateMovie ] = useState(true)
 
     const [ cast, setCast ] = useState([])
     const [ showCalendar, setShowCalendar ] = useState(false)
     const { addMovie } = useContext(MovieContext)
     const [ category, setCategory ] = useState([])
+    const [fileInputState, setFileInputState] = useState('');
+    const [selectedFile, setSelectedFile] = useState();
+    const [validated, setValidated] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,9 +47,20 @@ function AddMovie () {
             console.log(error);
         });
     }, [])
+    
+    const handleFileInputChange = (e) => {
+        const file = e.target.files[0];
+        previewFile(file);
+        setFileInputState(e.target.value);
+    };
 
-
-    const [validated, setValidated] = useState(false);
+    const previewFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setSelectedFile(reader.result);
+        };
+    };
 
     const updateMovie = e => {
         setMovie({...movie, [e.target.name]: e.target.value});
@@ -58,7 +73,6 @@ function AddMovie () {
     }
 
     const updateCast = index => e => {
-        
         let newArr = [...cast]; 
         newArr[index] = e.target.value
         setCast(newArr);
@@ -79,15 +93,18 @@ function AddMovie () {
         } else {
             const categorys = document.querySelectorAll(`.${cx('inputCategory')}`)    
             const submit = movie
-            categorys.forEach((category, index) => {
+            categorys.forEach((category) => {
                 if(category.checked) {
                     submit.category.push(category.value)
                 }
             })
-            submit.cast = cast;
+            if (!selectedFile) return;
+            submit.image = selectedFile
+            submit.cast = cast
+            submit.state = stateMovie
             addMovie(submit)
+            navigate('/manager/movie')
             
-            navigate(-1)
         }
         setValidated(true);
     };
@@ -111,15 +128,13 @@ function AddMovie () {
                         <div className={cx('item')}>
                             <span>Tên phim tiếng việt</span>
                             <input className="form-control"value={movie.titleVi} placeholder="Tên phim tiếng việt" name="titleVi" onChange={updateMovie} required/>
-                            <Form.Control.Feedback type="invalid">
-                                Không được để trống phần này
-                            </Form.Control.Feedback>
+                           
                         </div>
                     </Col>
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Thời lượng</span>
-                            <input className="form-control"value={movie.duration} placeholder="Thời lượng" name="duration" onChange={updateMovie} required/>
+                            <input className="form-control" type="number" value={movie.duration} placeholder="Thời lượng" name="duration" onChange={updateMovie} required/>
                             <Form.Control.Feedback type="invalid">
                                 Không được để trống phần này
                             </Form.Control.Feedback>
@@ -147,9 +162,22 @@ function AddMovie () {
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Image</span>
-                            <input className="form-control"value={movie.image} placeholder="Image" name="image" onChange={updateMovie} required/>
-                            <Form.Control.Feedback type="invalid">
-                                Không được để trống phần này
+                            <input
+                                id="fileInput"
+                                type="file"
+                                name="image"
+                                onChange={handleFileInputChange}
+                                value={fileInputState}
+                                required
+                            />
+                            {selectedFile && (
+                                <img
+                                    src={selectedFile}
+                                    alt="chosen"
+                                    style={{ height: '60px' }}
+                                />
+                            )}<Form.Control.Feedback type="invalid">
+                                Vui lòng chọn ảnh
                             </Form.Control.Feedback>
                         </div>
                     </Col>
@@ -196,7 +224,7 @@ function AddMovie () {
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Nước sản xuất</span>
-                            <input placeholder="Nước sản xuất" name="country" onChange={(e) => updateMovie}/>
+                            <input placeholder="Nước sản xuất" name="country" onChange={updateMovie}/>
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -230,10 +258,16 @@ function AddMovie () {
                             </div>
                         </div>
                     </Col>
+                    <Col lg={6}>
+                        <div className={cx('item')}>
+                            <span>Trạng thái</span>
+                            <input className="input_check" type="checkbox" checked={stateMovie} onClick={() => setStateMovie(!stateMovie)}/>
+                        </div>
+                    </Col>
                     <Col lg={12}>
                         <div className={cx('item')}>
                             <span>Nội dung</span>
-                            <textarea name="description" onChange={(e) => updateMovie}>{movie.description}</textarea>
+                            <textarea name="description" onChange={updateMovie}>{movie.description}</textarea>
                         </div>
                     </Col>
                 </Row>

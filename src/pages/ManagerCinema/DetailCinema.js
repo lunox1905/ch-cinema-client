@@ -12,22 +12,33 @@ function EditCinema ({cinema, setShow, title}) {
                 <div style={{width: '600px'}}>
                     
                         <Container>
-                            <p>{title}</p>
+                            <h4>{title}</h4>
                                 <Row>
                                     <Col lg='12'>
+                                        <div className={cx('detail_item')}>
                                         <span>Tên rạp</span>
                                         <p>{cinema.name}</p>
+                                        </div>
                                     </Col>
                                     <Col lg='12'>
+                                        <div className={cx('detail_item')}>
                                         <span>Số điện thoại</span>
-                                        <p>{cinema.name}</p>
+                                        <p>{cinema.phoneNumber}</p>
+                                        </div>
                                     </Col>
                                     <Col lg='12'>
+                                        <div className={cx('detail_item')}>
                                         <span>Địa chỉ</span>
-                                        <p>{cinema.name}</p>
+                                        <p>{cinema.address}</p>
+                                        </div>
+                                    </Col>
+                                    <Col lg='12'>
+                                        <div className={cx('detail_item')}>
+                                        <span>Số chỗ ngồi</span>
+                                        <p>{cinema.numberOfSeats}</p>
+                                        </div>
                                     </Col>
                                 </Row>
-                            <Button variant="primary" type="submit">Sửa</Button>
                         </Container>
                 </div>
             </Alert>

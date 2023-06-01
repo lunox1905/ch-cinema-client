@@ -1,10 +1,12 @@
-
-import { Navigate } from 'react-router-dom';
+import Auth from '../Auth'
 
 const ProtectedRoute = ({ Component }) => {
-
-
-	return Component 
+	return (
+		<>
+			<Auth/>
+			{Component}
+		</>
+	)
 }
 
 export default ProtectedRoute

@@ -3,9 +3,27 @@ import { authReducer } from '../store/authReducer'
 import axios from 'axios'
 import { LOCAL_STORAGE_TOKEN_NAME, URL } from './constants'
 import setAuthToken from '../utils/setAuthToken'
-import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext()
+
+export const getUsers = async () => {
+    try {
+        const res = await axios.get(`http://${URL}/getusers`)
+        return res.data
+    } catch (err) {
+        return err.res
+    }
+}
+
+export const updataRole = async (id, role) => {
+    try {
+        const res = await axios.post(`http://${URL}/updaterole/${id}`, role)
+        return res.data
+    } catch (err) {
+        console.log(err)
+        return err
+    }
+}
 
 const AuthContextProvider = ({children}) => {
     const [authState, dispatch] = useReducer(authReducer, {
@@ -13,8 +31,6 @@ const AuthContextProvider = ({children}) => {
         isAuthenticated: false,
         user: null
     })
-    
-    const Navigate = useNavigate()
 
     const loadUser = async() => {
         if(localStorage[LOCAL_STORAGE_TOKEN_NAME]){

@@ -27,8 +27,9 @@ function EditMovie () {
         premiereDate: '',
         trailer: '',
         image: '',
-        category: []
+        category: [],
     })
+    const [ stateMovie, setStateMovie ] = useState(false)
     const [ loading, setLoading ] = useState(true)
     const params = useParams()
     const navigate = useNavigate()
@@ -38,6 +39,7 @@ function EditMovie () {
         .then(res => {
             if(res.success) {
                 setMovieEdit(res.movie)
+                setStateMovie(res.movie.state)
             }
         })
 
@@ -55,8 +57,22 @@ function EditMovie () {
     const [ cast, setCast ] = useState([])
     const [ showCalendar, setShowCalendar ] = useState(false)
     
+    const [selectedFile, setSelectedFile] = useState();
+    const [fileInputState, setFileInputState] = useState('');
     const [ category, setCategory ] = useState([])
-    
+    const handleFileInputChange = (e) => {
+        const file = e.target.files[0];
+        previewFile(file);
+        setFileInputState(e.target.value);
+    };
+
+    const previewFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setSelectedFile(reader.result);
+        };
+    };
     const updateMovie = e => {
         setMovieEdit({...movieEdit, [e.target.name]: e.target.value});
       }
@@ -90,6 +106,10 @@ function EditMovie () {
             }
         })
         submit.cast = cast;
+        submit.state = stateMovie
+        if(selectedFile) {
+            submit.uploadImage = selectedFile
+        }
         editMovie(submit, movieEdit._id)
         navigate(-1)
     }
@@ -134,7 +154,27 @@ function EditMovie () {
                     <Col lg={6}>
                         <div className={cx('item')}>
                             <span>Image</span>
-                            <input value={movieEdit.image} placeholder="Image" name="image" onChange={updateMovie}/>
+                            <input
+                                id="fileInput"
+                                type="file"
+                                name="image"
+                                onChange={handleFileInputChange}
+                                value={fileInputState}
+                                required
+                            />
+                            {selectedFile ? (
+                                <img
+                                    src={selectedFile}
+                                    alt="chosen"
+                                    style={{ height: '60px' }}
+                                />
+                            ) : (
+                                <img
+                                    src={movieEdit.image}
+                                    alt="chosen"
+                                    style={{ height: '60px' }}
+                                />
+                            )}
                         </div>
                     </Col>
                     <Col lg={6}>
@@ -211,6 +251,15 @@ function EditMovie () {
                             </div>
                         </div>
                     </Col>
+                    <Col lg={6}>
+                        <div className={cx('item')}>
+                            <span>Trạng thái</span>
+                            <div className={cx('box')}>
+                                <input type="checkbox" checked={stateMovie} className="input_check" onClick={() => setStateMovie(!stateMovie)}/>
+                            </div>
+                        </div>
+                    </Col>
+                    
                     <Col lg={12}>
                         <div className={cx('item')}>
                             <span>Nội dung</span>

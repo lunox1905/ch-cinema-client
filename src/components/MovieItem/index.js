@@ -4,11 +4,10 @@ import { Link } from "react-router-dom"
 const cx = classNames.bind(styles)
 
 function MovieItem ({movie, width, height}) {
-    console.log(width)
     return (
         <div className={cx('item')}>
             <div className={cx('image')}>
-                <Link to={'/' + movie.slug}>
+                <Link to={'/movie/' + movie.slug}>
                     <img style={{width: {width}, height: {height}}} src={movie.image} alt='movie'/>
                     <div className={cx('overlay')}>
                         <button>MUA VÉ</button>

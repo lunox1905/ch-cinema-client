@@ -45,6 +45,7 @@ function EditCinema ({data, setShow, title, setLoading, editCinema}) {
                                     <Input title={'Tên rạp'} placeholder={'Tên rạp'} value={cinema.name} name={'name'} handleUpdate={handleChange}/> 
                                     <Input title={'Số điện thoại'} placeholder={'Số điện thoại'} value={cinema.phoneNumber} name={'phoneNumber'} handleUpdate={handleChange}/> 
                                     <Input title={'Địa chỉ'} placeholder={'Địa chỉ'} value={cinema.address} name={'address'} handleUpdate={handleChange}/> 
+                                    <Input title={'Số chỗ ngồi'} placeholder={'Số chỗ ngồi'} value={cinema.numberOfSeats} name={'numberOfSeats'} handleUpdate={handleChange}/> 
                                     
                                 </Row>
                             <Button variant="primary" type="submit">Sửa</Button>

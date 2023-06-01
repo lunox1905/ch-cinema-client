@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from './SideBar.module.scss'
 import Image from "../Image";
 import { Link } from "react-router-dom";
-import { FaBars, FaFilm, FaElementor, FaImage, FaRegChartBar, FaUniversity, FaRegCalendarAlt } from 'react-icons/fa'
+import { FaBars, FaFilm, FaElementor, FaImage, FaRegChartBar, FaUniversity, FaRegCalendarAlt, FaBuffer, FaUserAlt } from 'react-icons/fa'
 import { useState } from "react";
 const cx = classNames.bind(styles)
 
@@ -10,7 +10,7 @@ function SideBar () {
     const menu = [
         {
             title: 'DashBoard',
-            link: '/',
+            link: '/manager',
             icon: <FaRegChartBar/>
         },
     
@@ -39,6 +39,16 @@ function SideBar () {
             link: '/manager/showtime',
             icon: <FaRegCalendarAlt/>
         },
+        {
+            title: 'Thức ăn',
+            link: '/manager/food',
+            icon: <FaBuffer/>
+        },
+        {
+            title: 'Người dùng',
+            link: '/manager/user',
+            icon: <FaUserAlt/>
+        }
     ]
 
     const [open, setOpen] = useState(true)
@@ -47,14 +57,16 @@ function SideBar () {
             <div className={cx('container')}>
          
                 <div className={cx('logo')}>
-                    <Image src={require('../../assets/images/logo3.png')} alt='logo'/>
+                    <Link to={'/'}>
+                        <Image src={require('../../assets/images/logo3.png')} alt='logo'/>
+                    </Link>
                     <FaBars onClick={() => setOpen(!open)}/>
                 </div>
                 <div className={cx('sidebar')}>
                     <ul>
                         {
                             menu.map((menu, index) => (
-                                <li>
+                                <li key={index}>
                                     <Link to={menu.link}>
                                         {menu.icon}
                                         <span>{menu.title}</span>

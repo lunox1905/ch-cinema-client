@@ -13,11 +13,16 @@ function Home () {
 
     const { movieState: { movies }} = useContext(MovieContext)
     const [ stateMovie, setStateMovie ] = useState(true) 
-   
-    const moviesFilter = movies.filter((movie, index) => {
+    const moviesFilter = []
+    movies.forEach(m => {
         const now = new Date()
-        const date = new Date(movie.premiereDate.toString())
-        return (now > date) === stateMovie && (index < 8)
+        const date = new Date(m.premiereDate.toString())
+        if((now > date) === stateMovie && m.state) {
+            moviesFilter.push(m)
+        }
+        if(moviesFilter.length > 8) {
+            return
+        }
     })
     return (
         <div className={cx('wrapper')}>
@@ -37,9 +42,7 @@ function Home () {
                                     <MovieItem movie={movie}/>
                                 </Col>
                             )) : <></>
-                            
                         }
-                        
                     </Row>
                 </Container>
             </div>

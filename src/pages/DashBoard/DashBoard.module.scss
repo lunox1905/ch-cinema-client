@@ -1,0 +1,88 @@
+.wrapper {
+    width: 100%;
+    background-color: rgb(243, 244, 249);
+    padding-bottom: 50px;
+    .card {
+        height: 160px;
+        background-color: white;
+        border-radius: 12px;
+        vertical-align: middle;
+        padding: 30px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        h2 {
+            font-weight: 600;
+            font-size: 22px;
+        }
+        h4 {
+            font-size: 16px;
+        }
+        svg {
+            font-size: 30px;
+        }
+    }
+    .card1 {
+        background: linear-gradient(rgb(193, 178, 230), rgb(115, 82, 199));
+    }
+    .card2 {
+        background: linear-gradient(rgb(163, 234, 211), rgb(59, 210, 162));
+    }
+    .card3 {
+        background: linear-gradient(rgb(249, 204, 138), rgb(243, 151, 17));
+    }
+    .card4 {
+        background: linear-gradient(rgb(244, 163, 172), rgb(231, 49, 69));
+    }
+    .chart {
+        background-color: white;
+        border-radius: 12px;
+        margin: 20px 0;
+        padding: 20px 0;
+        height: 380px;
+        .chart_line {
+            margin: 0 40px;
+            display: flex;
+            height: 280px;
+            justify-content: center;
+        }
+        h3 {
+            margin: 0 0 20px 30px;
+            font-weight: 600;
+            font-size: 17px;
+            font-family: sans-serif;
+        }
+    }
+    .table {
+        border-radius: 12px;
+        background-color: white;
+        padding: 10px 30px;
+        font-size: 16px;
+        h3 {
+            margin: 10px 0;
+            font-weight: 600;
+            font-size: 17px;
+            font-family: sans-serif;
+        }
+        tr {
+            font-size: 14px;
+            border: none;
+            td {
+                border: none;
+                vertical-align: middle;
+                img {
+                    height: 50px;
+                    width: 36px;
+                }
+                
+                &:nth-child(2) {
+                    width: 70%;
+                }
+                .img_food {
+                    width: 50px;
+                    height: 30px;
+                }
+            }
+        }  
+    }
+}

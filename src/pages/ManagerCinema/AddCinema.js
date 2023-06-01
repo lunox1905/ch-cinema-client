@@ -12,6 +12,7 @@ function AddCinema ({ setShow, title, setLoading, addCinema}) {
         name: '',
         phoneNumber: '',
         address: '',
+        numberOfSeats: 128
     })
 
     const [ validated, setValidated ] = useState(false)
@@ -50,6 +51,7 @@ function AddCinema ({ setShow, title, setLoading, addCinema}) {
                                     <Input title={'Tên rạp'} placeholder={'Tên rạp'} value={cinema.name} name={'name'} handleUpdate={handleChange}/> 
                                     <Input title={'Số điện thoại'} placeholder={'Số điện thoại'} value={cinema.phoneNumber} name={'phoneNumber'} handleUpdate={handleChange}/> 
                                     <Input title={'Địa chỉ'} placeholder={'Địa chỉ'} value={cinema.address} name={'address'} handleUpdate={handleChange}/> 
+                                    <Input title={'Số chỗ ngồi'} placeholder={'Số chỗ ngồi'} value={cinema.numberOfSeats} name={'numberOfSeats'} handleUpdate={handleChange}/> 
                                     
                                 </Row>
                             

@@ -1,0 +1,263 @@
+.wrapper {
+    .booking {
+        background-color: var(--primary-color);
+        padding: 10px;
+        .heading, .selected_seat {
+            color: white;
+            display: inline-block;
+            font-size: 24px;
+        }
+        .selected_seat {
+            margin: 2px 0px 20px 0;
+        }
+        .heading {
+            margin: 2px 12px 20px 0;
+        }
+        .container {
+            background-color: white;
+            width: 100%;
+            table {
+                margin: 0px;
+                thead {
+                    background-color: #47251c;
+                    color: white;
+                }
+                .btn-amount {
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 50%;
+                    background-color: #ccc;
+                    line-height: 100%;
+                }
+                .col {
+                    width: 18%;
+                }
+                .amount {
+                    display: inline-block;
+                    width: 12px;
+                    margin: 0 15px;
+                    text-align: center;
+                }
+                tr {
+                    td{
+                        padding: 10px 0 10px 15px;
+                        height: 60px;
+                        vertical-align: middle;
+                    }
+                    td:first-child {
+                        width: 50%;
+                    }
+                    .combo_item {
+                        display: flex;
+                        img {
+                            width: 80px;
+                        }
+                        .combo_box {
+                            margin: 0 20px;
+                            p {
+                                font-size: 15px;
+                                font-weight: 600;
+                                margin: 0;
+                            }
+                            span {
+                                font-size: 13px;
+                            }
+                        }
+                    }
+                }
+                .sum {
+                    td {
+                        height: 40px;
+                        color: rgb(241, 100, 100);
+                    }
+                }
+            }
+            .screen{
+                text-align: center;
+                position: relative;
+                margin: 20px 0 50px 0;
+                padding: 15px 0;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    width: 38%;
+                    height: 2px;
+                    left: 50%;
+                    bottom: 6px;
+                    transform: translate(-50%, -50%);
+                    background-color: black;
+                }
+            }
+            .seat {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                .seat_list {
+                    ul {
+                        margin: 6px 0;
+                        padding: 0;
+                        li {
+                            display: inline-block;
+                            width: 24px;
+                            height: 24px;
+                            margin: 0 3px;
+                            cursor: pointer;
+                            text-align: center;
+                            background-color: #ccc;
+                        }
+                    }
+                    .active {
+                        background-color: var(--primary-color);
+                    }
+                }
+        
+                .seat_row {
+                    padding: 0 10px;
+                    li {
+                        margin: 6px;
+                        width: 24px;
+                        height: 24px;
+                        border: 1px solid #ccc;
+                        text-align: center;
+                    }
+                }
+            }
+            .instruc {
+                display: flex;
+                justify-content: space-around;
+                width: 70%;
+                margin: 0 auto;
+                padding: 30px;
+                li {
+                    display: flex;
+                    align-items: center;
+                    div {
+                        width: 12px;
+                        height: 12px;
+                    }
+                    span {
+                        color: black;
+                        font-size: 14px;
+                        margin: 0 10px;
+                    }
+                    .green {
+                        background-color: green;
+                    }
+                    .primary {
+                        background-color: var(--primary-color);
+                    }
+                    .gray {
+                        background-color: #ccc;
+                    }
+                    .blue {
+                        background-color: rgb(115, 151, 229);
+                    }
+                }
+            }
+        }      
+    }
+    ul {
+        padding: 20px 30px;
+        li {
+            margin: 20px 5px;
+            display: flex; 
+            .left {
+                width: 250px;
+            }
+            .right {
+                select, input, div {
+                    width: 320px;
+                    height: 36px;
+                    padding: 6px 12px;
+                    color: black;
+                    border: 1px solid #ccc;
+                }
+                div {
+                    background: #f3f2f2;
+                }
+                button {
+                    font-family: revert;
+                    background-color: var(--primary-color);
+                    padding: 5px 12px;
+                    color: white;
+                    margin: 0 10px;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+    
+    .ticket {
+        padding: 10px 25px;
+        background-color: #f1f1f1;
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 4px 0;
+        }
+        img {
+            width: 100%;
+        }
+        div {
+            p {
+                display: inline-block;
+                margin: 0 10px 0 0;
+            }
+            span {
+                color: #747070;
+            }
+        }
+        .sum {
+            color:rgb(241, 100, 100)
+        }
+        div:last-child {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+            button {
+                background-color: var(--primary-color);
+                color: white;
+                padding: 6px 20px;
+                margin: 0 12px;
+                font-size: 15px;
+            }
+        }
+    }
+    .payment_success {
+        width: 400px;
+        margin: 50px auto;
+        img {
+            width: 80px;
+            margin: 0 auto;
+            display: block;
+        }
+        h1 {
+            margin: 10px 0 20px 0;
+            text-align: center;
+            font-size: 18px;
+        }
+        .item {
+            display: flex;
+            span {
+                width: 80px;
+            }
+        }
+        .btn_option {
+            display: flex;
+            justify-content: space-between;
+            button:first-child {
+                width: 150px;
+                border: 2px solid rgb(143, 143, 243);
+                height: 36px;
+                border-radius: 16px;
+            }
+            button:last-child {
+                width: 150px;
+                border: 2px solid rgb(205, 136, 40);
+                height: 36px;
+                border-radius: 16px;
+            }
+        }
+    }
+}

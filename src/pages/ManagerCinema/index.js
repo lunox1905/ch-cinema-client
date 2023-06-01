@@ -8,6 +8,7 @@ import AddCinema from "./AddCinema";
 import EditCinema from "./EditCinema";
 import DetailCinema from './DetailCinema'
 import { CinemaContext } from "../../contexts/CinemaContext";
+import Modals from "../../components/Modal";
 const cx = classNames.bind(styles)
 
 function ManagerCinema() {
@@ -15,14 +16,16 @@ function ManagerCinema() {
     const [showAdd, setShowAdd] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [showDetail, setShowDetail] = useState(false)
+    const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(false)
     const [ cinema, setCinema ] = useState(null)
 
     const { cinemaState: { cinemas}, deleteCinema, addCinema, editCinema } = useContext(CinemaContext)
 
     const handleDelete= (e) => {
+        setShowModal(false)
         setLoading(true)
-        deleteCinema({id:e.target.closest('button').value})
+        deleteCinema({id: cinema})
         .then(response => {
             if(response) {
                 setLoading(false)
@@ -46,6 +49,8 @@ function ManagerCinema() {
     if(loading) return <Loading />
     return (
         <div className={cx('wrapper')}>
+            <Modals show={showModal} setShow={setShowModal} handle={handleDelete} 
+                title={'Xóa rạp chiếu'} content={'Bạn chắc chắn muốn xóa rạp này!!'} type={'Delete'}/>
             <div className={cx('header')}>
                 <Button variant="primary" onClick={() => setShowAdd(true)}>
                     <FaPlus/>Thêm rạp chiếu
@@ -79,7 +84,10 @@ function ManagerCinema() {
                                     </button>
 
                                     <button value={cinema._id}>
-                                        <FaTrash color="red" onClick={handleDelete}/>   
+                                        <FaTrash color="red" onClick={e => {
+                                            setCinema(e.target.closest('button').value)
+                                            setShowModal(true)
+                                        }}/>   
                                     </button>
                                 </td>
                             </tr>
@@ -93,7 +101,7 @@ function ManagerCinema() {
             </div>
             { showAdd && <AddCinema title={'Thêm rạp chiếu phim'} setShow={setShowAdd} setLoading={setLoading} addCinema={addCinema}/>} 
             { showEdit && <EditCinema data={cinema} setShow={setShowEdit} title={'Sửa rạp chiếu phim'} setLoading={setLoading} editCinema={editCinema}/>} 
-            { showDetail && <DetailCinema cinema={cinema} setShow={setShowEdit} title={'Chi tiết rạp chiếu phim'}/>} 
+            { showDetail && <DetailCinema cinema={cinema} setShow={setShowDetail} title={'Chi tiết rạp chiếu phim'}/>} 
             
         </div>
     )

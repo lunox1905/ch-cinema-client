@@ -2,14 +2,15 @@
 import classNames from "classnames/bind"
 import styles from './Movie.module.scss'
 import { FaStar } from "react-icons/fa"
+import { memo } from "react"
 
 const cx = classNames.bind(styles)
-function Rating ({show}) {
+function Rating ({show, id, updateRating}) {
     const list = document.querySelectorAll('.item-rating')
     const handleOver = (e) => {
         list.forEach((element, index) => {
             
-            if(index <= e.target.closest('li').value) {
+            if(index < e.target.closest('li').value) {
                 element.classList.add(cx('active'))
             } else {
                 element.classList.remove(cx('active'))
@@ -26,7 +27,8 @@ function Rating ({show}) {
     }
 
     const handleClick = (e) => {
-        
+        updateRating(id, {rating: e.target.closest('li').value})
+        console.log(e.target.closest('li').value)
 
     }
     return (
@@ -36,7 +38,6 @@ function Rating ({show}) {
             style={show ? {display: 'flex'} : {display: 'none'}}
             onClick={handleClick}
         >
-            <li className="item-rating" value={0} ><FaStar/></li>
             <li className="item-rating" value={1} ><FaStar/></li>
             <li className="item-rating" value={2} ><FaStar/></li>
             <li className="item-rating" value={3} ><FaStar/></li>
@@ -46,8 +47,9 @@ function Rating ({show}) {
             <li className="item-rating" value={7} ><FaStar/></li>
             <li className="item-rating" value={8} ><FaStar/></li>
             <li className="item-rating" value={9} ><FaStar/></li>
+            <li className="item-rating" value={10} ><FaStar/></li>
         </ul>
     )
 } 
 
-export default Rating
+export default memo(Rating)

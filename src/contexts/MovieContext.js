@@ -33,7 +33,7 @@ const MovieContextProvider = ({children}) => {
 		} catch (e){
 			console.log('err get MOVIE' + e)
 		}
-	}
+	} 
 
 	useEffect(() => {
 		getMovies()
@@ -46,7 +46,7 @@ const MovieContextProvider = ({children}) => {
 			
 			if(res.data.success) {
 				dispatch({type: ADD_MOVIE, payload: res.data.movie})
-				return true
+				return res.data
 			}
 		} catch {
 			
@@ -80,7 +80,16 @@ const MovieContextProvider = ({children}) => {
 		}
 	}
 
-    const MovieContextData = { getMovies, getMovie, addMovie, editMovie, deleteMovie, movieState}
+	const updateRating = async (id, rating) => {
+		try {
+			const res = await axios.post(`http://${URL}/movie/updaterating/${id}`, rating)
+			return res.data
+		} catch (err) {
+			return err.res.data
+		}
+	}
+
+    const MovieContextData = { getMovies, getMovie, addMovie, editMovie, deleteMovie, updateRating, movieState}
     return (
         <MovieContext.Provider value={MovieContextData}>
             {children}

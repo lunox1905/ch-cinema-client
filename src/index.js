@@ -9,6 +9,7 @@ import MovieContextProvider from './contexts/MovieContext';
 import AuthContextProvider from './contexts/AuthContext';
 import CinemaContextProvider from './contexts/CinemaContext';
 import ShowTimeProvider from './contexts/ShowTimeContext';
+import FoodContextProvider from './contexts/FoodContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +21,9 @@ root.render(
             <AuthContextProvider>
               <CinemaContextProvider>
                 <ShowTimeProvider>
-                  <App />  
+                  <FoodContextProvider>
+                    <App />  
+                  </FoodContextProvider>
                 </ShowTimeProvider>
               </CinemaContextProvider>
             </AuthContextProvider>

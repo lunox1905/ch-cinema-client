@@ -10,7 +10,7 @@
         position: fixed;
    
         button {
-      
+            position: relative;
             height: 38px;
             display: flex;
             border-radius: 30px;
@@ -32,6 +32,41 @@
             span {
                 margin: 0 15px;
                 font-size: 14px;
+            }
+            &:hover {
+                ul {
+                    display: block;
+                }
+            }
+
+            ul {
+                display: none;
+                position: absolute;
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                background-color: white;
+                top: 55px;
+                width: 180px;
+                padding: 10px 20px;
+                margin: 0;
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                z-index: 99;
+                li {
+                    padding: 6px 10px;
+                    font-size: 14px;
+                    text-align: start;
+                    &:hover {
+                        background-color: #ccc;
+                    }
+                }
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: -16px;
+                    left: 0;
+                    right: 20px;
+                    background-color: transparent;
+                    height: 16px;
+                }
             }
         }
     }

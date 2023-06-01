@@ -27,7 +27,7 @@ export const cinemaReducer = (state, action) => {
             return {
                 ...state,
                 
-                cinemas: state.cinemas.filter(cinema => cinema._id !== payload)
+                cinemas: state.cinemas.filter(cinema => cinema._id !== payload.id)
             }
         default:
             return {

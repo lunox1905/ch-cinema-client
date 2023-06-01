@@ -97,3 +97,43 @@ ul {
         color: #a19f9f;
     }
 }
+
+.modal-body {
+    min-height: 100px;
+}
+
+.alert-wrapper {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px 0 10px 20px;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 999;
+    button {
+        top: -20px !important;
+    }
+}
+
+.not-found {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 500px;
+        height: 240px;
+    }
+}
+#fileInput {
+    border: none;
+    padding: 0;
+    border-radius: 0;
+}
+.input_check {
+    height: 14px !important;
+    width: 14px !important;
+}

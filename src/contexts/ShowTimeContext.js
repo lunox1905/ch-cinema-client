@@ -9,10 +9,7 @@ const ShowTimeProvider = ({children}) => {
         try {
 		
 			const res = await axios.get(`http://${URL}/showtime/getshowtimes`)
-			
-			if(res.data.success) {
-				return res.data
-			}
+			return res.data
 		} catch {
 			
 		}
@@ -20,7 +17,6 @@ const ShowTimeProvider = ({children}) => {
 
     const getShowTime = async (id) => {
         try {
-		
 			const res = await axios.get(`http://${URL}/showtime/getshowtime/${id}`)
 			
 			if(res.data.success) {
@@ -35,10 +31,7 @@ const ShowTimeProvider = ({children}) => {
         try {
 		
 			const res = await axios.get(`http://${URL}/showtime/getShowTimeByMovie/${id}`)
-			
-			if(res.data.success) {
-				return res.data
-			}
+			return res.data
 		} catch {
 			
 		}
@@ -48,10 +41,7 @@ const ShowTimeProvider = ({children}) => {
         try {
 		
 			const res = await axios.get(`http://${URL}/showtime/getShowTimeByCinema/${id}`)
-			
-			if(res.data.success) {
-				return res.data
-			}
+			return res.data
 		} catch {
 			
 		}
@@ -60,7 +50,7 @@ const ShowTimeProvider = ({children}) => {
     const addShowTime = async (showTime) => {
         try {
 		
-			const res = await axios.get(`http://${URL}/showtime/addShowTime`,showTime)
+			const res = await axios.post(`http://${URL}/showtime/addShowTime`,showTime)
 			
 			if(res.data.success) {
 				return res.data
@@ -73,11 +63,9 @@ const ShowTimeProvider = ({children}) => {
     const deleteShowTime = async (id) => {
         try {
 		
-			const res = await axios.delete(`http://${URL}/showtime/editShowTime/`,id)
-			
-			if(res.data.success) {
-				return res.data
-			}
+			const res = await axios.post(`http://${URL}/showtime/deleteShowTime/`,id)
+			console.log(id)
+			return res.data
 		} catch {
 			
 		}
@@ -86,7 +74,7 @@ const ShowTimeProvider = ({children}) => {
     const editShowTime = async (id, showTime) => {
         try {
 		
-			const res = await axios.put(`http://${URL}/showtime/editShowTime/${id}`,showTime)
+			const res = await axios.post(`http://${URL}/showtime/editShowTime/${id}`,showTime)
 			
 			if(res.data.success) {
 				return res.data

@@ -13,7 +13,6 @@ function InfoMovie({title, content}) {
                 Array.isArray(content) ? (
                     <div>
                     {
-
                         content.map((element,index) => {
                             return index + 1 < content.length ? <p>{element.title ? element.title : element},</p> : <p>{element.title ? element.title : element}</p>
                         })

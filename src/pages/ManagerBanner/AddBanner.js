@@ -9,21 +9,33 @@ import axios from "axios";
 const cx = classNames.bind(styles)
 function AddBanner ({ setShow, title, setLoading}) {
 
-    const [ banner, setBanner ] = useState({
-        image:'',
-        link: ''
-    })
-    const handleChange =(e) => {
-        setBanner({...banner, [e.target.name]: e.target.value});
-    }
+    const [fileInputState, setFileInputState] = useState('');
+    const [selectedFile, setSelectedFile] = useState();
+    const [ link, setLink ] = useState('')
+    const handleFileInputChange = (e) => {
+        const file = e.target.files[0];
+        previewFile(file);
+        setFileInputState(e.target.value);
+    };
 
+    const previewFile = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setSelectedFile(reader.result);
+        };
+    };
     const submit = () => {
         setLoading(true)
+        const banner = {
+            link: link,
+            image: selectedFile
+        }
         axios.post(`http://${URL}/addbanner/`, banner)
         .then(response => {
             if(response.data.success) {
-                setLoading(false)
                 setShow(false)
+                setLoading(false)
             }
         })
         .catch(error => {
@@ -38,12 +50,24 @@ function AddBanner ({ setShow, title, setLoading}) {
                     <Container>
                         <p>{title}</p>
                         
-                            <Row>
+                            <Row> 
+                                <input
+                                        className={cx('input_file')}
+                                        type="file"
+                                        name="image"
+                                        onChange={handleFileInputChange}
+                                        value={fileInputState}
+                                        required
+                                    />
+                                    {selectedFile && (
+                                        <img
+                                            src={selectedFile}
+                                            alt="chosen"
+                                            style={{ height: '200px' }}
+                                        />
+                                    )}
                                 <Col lg={12}>
-                                    <input placeholder="Dường dẫn ảnh" name="image" value={banner.image} onChange={handleChange}/>
-                                </Col>  
-                                <Col lg={12}>
-                                    <input placeholder="Path" name="link" value={banner.link} onChange={handleChange}/>
+                                    <input placeholder="Path" name="link" value={link} onChange={(e) => setLink(e.target.value)}/>
                                 </Col>
                             
                             </Row>
