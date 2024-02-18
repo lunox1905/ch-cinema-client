@@ -72,7 +72,7 @@ function Footer() {
             ]
         },
         {
-            title: 'KẾT NỐI CH CINEMA',
+            title: 'KẾT NỐI GALAXY CINEMA',
             item: [
                 {
                     title: <FaFacebook/>,

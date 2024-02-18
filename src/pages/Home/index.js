@@ -4,13 +4,13 @@ import Banner from "../../components/Banner";
 import { MovieContext } from '../../contexts/MovieContext';
 import { useContext, useState } from "react";
 import { Container, Row, Col} from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import axios from "axios";
 import MovieItem from "../../components/MovieItem";
 
 const cx = classNames.bind(styles)
 
 function Home () {
-
+    
     const { movieState: { movies }} = useContext(MovieContext)
     const [ stateMovie, setStateMovie ] = useState(true) 
     const moviesFilter = []
@@ -35,7 +35,7 @@ function Home () {
                     </ul>
                 </div>
                 <Container>
-                    <Row md={4}>
+                    <Row lg={4} md={3} sm={1}>
                         {
                             moviesFilter ? moviesFilter.map(movie => (
                                 <Col>

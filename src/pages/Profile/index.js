@@ -6,6 +6,7 @@ import { Container, Breadcrumb } from 'react-bootstrap';
 import InfoProfile from "./InfoProfile";
 import MyTransaction from './MyTransaction'
 import Auth from "../../components/Auth";
+import { LOCAL_STORAGE_TOKEN_NAME } from "../../contexts/constants";
 const cx = classNames.bind(styles)
 
 function Home () {
@@ -13,7 +14,7 @@ function Home () {
     const [ showInfo, setShowInfo ] = useState(true)
     const [ showLogin, setShowLogin ] = useState(false)
     useEffect(() => {
-        if(!user) {
+        if(!localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
             setShowLogin(true)
         }
     },[])

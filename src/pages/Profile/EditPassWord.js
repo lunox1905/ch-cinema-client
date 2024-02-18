@@ -58,7 +58,7 @@ function EditPassWord ({editPassWord, setShow, setLoading}) {
     const submit = () => {
         setLoading(true)
         if(validate()) {
-          editPassWord(pass.newPassword)
+          editPassWord({password: pass.password, newPassword:pass.newPassword})
           .then((res) => {
             if(res.data.success) {
                 setShow(false)
@@ -78,19 +78,19 @@ function EditPassWord ({editPassWord, setShow, setLoading}) {
                         <Row>
                             <Col lg='8'>
                                 <div className={cx('form-edit')}>
-                                    <input className="form-controll" value={pass.password} name="password" required placeholder="Mật khẩu hiện tại" onChange={handleChange}/>
+                                    <input className="form-controll" type="password" value={pass.password} name="password" required placeholder="Mật khẩu hiện tại" onChange={handleChange}/>
                                     <span>{err?.password}</span>
                                 </div>
                             </Col>
                             <Col lg='8'>
                                 <div className={cx('form-edit')}>
-                                    <input className="form-controll" value={pass.newPassword} name="newPassword" required placeholder="Mật khẩu mới" onChange={handleChange}/>
+                                    <input className="form-controll" type="password" value={pass.newPassword} name="newPassword" required placeholder="Mật khẩu mới" onChange={handleChange}/>
                                     <span>{err?.newPassword}</span>
                                 </div>
                             </Col>
                             <Col lg='8'>
                                 <div className={cx('form-edit')}>
-                                    <input className="form-controll" value={pass.reNewPassword} name="reNewPassword" required placeholder="Nhập lại mật khẩu mới" onChange={handleChange}/>
+                                    <input className="form-controll" type="password" value={pass.reNewPassword} name="reNewPassword" required placeholder="Nhập lại mật khẩu mới" onChange={handleChange}/>
                                     <span>{err?.reNewPassword}</span>
                                 </div>
                             </Col>

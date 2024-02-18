@@ -15,13 +15,13 @@ function EditCinema ({data, setShow, title, setLoading, editShowTime}) {
     const { cinemaState: {cinemas }} = useContext(CinemaContext)
     const { movieState: { movies }} = useContext(MovieContext)
 
-    const [ movie, setMovie ] = useState(data.movie._id)
-    const [ cinema, setCinema ] = useState(data.cinema._id)
+    const [ movie, setMovie ] = useState(data.movieId._id)
+    const [ cinema, setCinema ] = useState(data.cinemaId._id)
     const [ date, setDate ] = useState(data.date)
     const [ time, setTime ] = useState(data.time)
     const [ price, setPrice ] = useState(data.price)
     const [ listMovie, setListMovie ] = useState(null)
-    const [ searchMovie, setSearchMovie ] = useState(data.movie.title)
+    const [ searchMovie, setSearchMovie ] = useState(data.movieId.title)
     const [ showCalendar, setShowCalendar ] = useState(false)
     const [ validated, setValidated ] = useState(false)
     const handleSearchMovie = (e) => {
@@ -49,7 +49,7 @@ function EditCinema ({data, setShow, title, setLoading, editShowTime}) {
           event.stopPropagation();
         } else {
             setLoading(true)
-            const showTime = {movie, cinema, date, time, price}
+            const showTime = {movieId: movie,cinemaId: cinema, date, time, price}
             editShowTime(data._id, showTime)
             .then(response => {
                 if(response.success) {

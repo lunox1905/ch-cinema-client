@@ -27,3 +27,12 @@ export const getBooking = async () => {
         
     }
 }
+
+export const reservePlace = async ({showTimeId, seat}) => {
+    try {
+        const res = await axios.post(`http://${URL}/booking/reserve-place`, {showTimeId, seat})
+        return res.data
+    } catch {
+        
+    }
+}

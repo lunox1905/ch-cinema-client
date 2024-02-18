@@ -1,6 +1,6 @@
 const convertDate = (date) => {
     const d = new Date(date)
-    return  `${d.getDay()}/${d.getMonth()}/${d.getFullYear()}`
+    return  `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`
 }
 
 export default convertDate

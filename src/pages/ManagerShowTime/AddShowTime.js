@@ -48,7 +48,7 @@ function AddShowTime ({ setShow, title, setLoading, addShowTime}) {
           event.preventDefault();
           event.stopPropagation();
         } else {
-            const showTime = {movie, cinema, date, time, price}
+            const showTime = {movieId: movie, cinemaId: cinema, date, time, price}
             setLoading(true)
             addShowTime(showTime)
             .then(response => {

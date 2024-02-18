@@ -29,7 +29,7 @@ function ShowTimes ({id}) {
                     res.showTime.forEach((item, index) => {
                         if(index === 0) {
                             show.push({
-                                cinema: item.cinema.name,
+                                cinema: item.cinemaId.name,
                                 showTime: [{
                                     time: item.time,
                                     _id: item._id
@@ -37,7 +37,7 @@ function ShowTimes ({id}) {
                                 date: item.date
                             })
                         } else {
-                            const f = show.find(f => f.cinema === item.cinema.name)
+                            const f = show.find(f => f.cinema === item.cinemaId.name)
                             if(f) {
                                 f.showTime.push({
                                     time: item.time,
@@ -45,7 +45,7 @@ function ShowTimes ({id}) {
                                 })
                             } else {
                                 show.push({
-                                    cinema: item.cinema.name,
+                                    cinemaId: item.cinemaId.name,
                                     showTime: [{
                                         time: item.time,
                                         _id: item._id

@@ -19,11 +19,13 @@ function InfoProfile ({user, editPassWord}) {
     const [ bookings, setBookings ] = useState([])
     const { movieState: {movies} } = useContext(MovieContext)
     const { cinemaState: {cinemas} } = useContext(CinemaContext)
+    console.log(cinemas)
     useEffect(() => {
         getBooking()
         .then(res => {
             if(res.success) {
                 setBookings(res.booking)
+                console.log(res.booking)
             }
         })
     }, [])
@@ -50,16 +52,27 @@ function InfoProfile ({user, editPassWord}) {
                             <td>{convertDate(b.createdAt)}</td>
                             <td className={cx('col')}>
                                 {
-                                    movies.find(m => m._id === b.movie).title
+                                    movies.find(m => m._id === b.movieId).title
                                 }
                             </td>
                             <td className={cx('col')}>
                                 {
-                                    cinemas.find(c => c._id === b.cinema).name
+                                    cinemas.find(c => c._id === b?.cinemaId).name
                                 }
                             </td>
                             <td className={cx('col')}>{convertPrice(b.price)}</td>
                             <td onClick={() => {
+                                setValue(b._id)
+                                setShow(true)
+                            }}>
+                                <QRCode
+                                size={256}
+                                style={{ height: "60px", maxWidth: "60px", width: "100%" }}
+                                value={b._id}
+                                viewBox={`0 0 256 256`}
+                                />
+                            </td>
+                            {/* <td onClick={() => {
                                 setValue(`Phim: ${movies.find(m => m._id === b.movie).title}, ` +
                                 `Cinema: ${cinemas.find(c => c._id === b.cinema).name}, `+
                                 `Seat: ${b.seat.map(s => s + ', ')}, ` +
@@ -79,7 +92,7 @@ function InfoProfile ({user, editPassWord}) {
                                     ))}`}
                                 viewBox={`0 0 256 256`}
                                 />
-                            </td>
+                            </td> */}
                         </tr>
                     ))
                 }

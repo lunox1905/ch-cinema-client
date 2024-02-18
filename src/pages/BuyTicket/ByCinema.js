@@ -24,7 +24,7 @@ function ByMovie () {
     const showTimeFilter = []
     if(cinema && movie) {
         showTimes.forEach((item, index) => {
-            if(item.movie._id === movie) {
+            if(item.movieId._id === movie) {
                 if(index === 0) {
                     showTimeFilter.push({
                         showTime: [{
@@ -58,12 +58,12 @@ function ByMovie () {
         if(cinema) {
             getShowTimeByCinema(cinema)
             .then(res => {
-                console.log(res)
                 if(res.success) {
                     setShowTimes(res.showTime)
                 }
             })
         }
+
     }, [cinema])
     return (
         <Row md={3}>
@@ -86,7 +86,7 @@ function ByMovie () {
                     </div>
                     {
                         moviesFilter.map(m => {
-                            if(showTimes.find(s => s.movie._id === m._id)) {
+                            if(showTimes.find(s => s.movieId._id === m._id)) {
                                 return (
                                 <li onClick={() => setMovie(m._id)}>
                                     <img src={m.image}/>

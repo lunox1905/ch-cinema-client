@@ -89,8 +89,8 @@ function ManagerShowTime() {
                                     
                             <tr>
                                 <td>{index + 1}</td>
-                                <td>{showTime.movie.title}</td>
-                                <td>{showTime.cinema.name}</td>
+                                <td>{showTime.movieId.title}</td>
+                                <td>{showTime.cinemaId.name}</td>
                                 <td>{showTime.time}</td>
                                 <td>
                                     <button value={showTime._id}>

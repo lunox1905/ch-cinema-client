@@ -58,7 +58,8 @@ function SideBar () {
          
                 <div className={cx('logo')}>
                     <Link to={'/'}>
-                        <Image src={require('../../assets/images/logo3.png')} alt='logo'/>
+                        <Image src="https://www.galaxycine.vn/_next/image/?url=%2F_next%2Fstatic%2Fmedia%2Fgalaxy-logo-mobile.074abeac.png&w=128&q=75" alt='logo'/>
+                        {/* <Image src={require('../../assets/images/logo3.png')} alt='logo'/> */}
                     </Link>
                     <FaBars onClick={() => setOpen(!open)}/>
                 </div>

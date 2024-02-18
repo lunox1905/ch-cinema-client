@@ -4,6 +4,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from '../../contexts/AuthContext'
 import querystring from 'qs'
 import crypto from 'crypto-js'
+import { reservePlace } from "../../contexts/BookingContext";
+
 const cx = classNames.bind(styles)
 
 const typePayments = [
@@ -41,18 +43,25 @@ const createDate = () => {
 function Payment ({setShowComponent, showTime, selectedFood, chooseSeat, sum}) {
     const [ typePayment, setTypePayment ] = useState(typePayments[0])
     const { authState: { user }} = useContext(AuthContext)
-   
-    const handlePayment = () => {
+    const [ error, setError ] = useState("")
+    const handlePayment = async () => {
         const ticket = {
-            cinema: showTime.cinema,
-            movie: showTime.movie,
+            cinemaId: showTime.cinemaId,
+            movieId: showTime.movieId,
+            showTimeId: showTime._id,
             food: selectedFood,
             seat: chooseSeat,
             price: sum,
-            user: user._id
+            userId: user._id
         }
-        
-        var vnpUrl ='https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
+
+        const reserve_place = await reservePlace({
+            showTimeId: showTime._id,
+            seat: ticket.seat
+        })
+
+        if(reserve_place.success) {
+            var vnpUrl ='https://sandbox.vnpayment.vn/paymentv2/vpcpay.html'
           
             var vnp_Params = {};
             vnp_Params['vnp_Version'] = '2.1.0';
@@ -70,18 +79,22 @@ function Payment ({setShowComponent, showTime, selectedFood, chooseSeat, sum}) {
             vnp_Params['vnp_CreateDate'] = createDate();
             vnp_Params = sortObject(vnp_Params);
         
-        var secretKey = 'CFUUYTUIZLPISYJQVBPQHSTIMYKTYLKN'
-        var signData = querystring.stringify(vnp_Params, { encode: false }); 
-        const hmac = crypto.HmacSHA512(signData, secretKey);
-        const signed = hmac.toString(crypto.enc.Hex);
-        vnp_Params['vnp_SecureHash'] = signed;
-        vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
-        if(vnpUrl) {
-            sessionStorage.setItem('ticket', JSON.stringify(ticket))
-            sessionStorage.setItem('idShowTime', showTime._id)
-            
-            window.location = vnpUrl
+            var secretKey = 'CFUUYTUIZLPISYJQVBPQHSTIMYKTYLKN'
+            var signData = querystring.stringify(vnp_Params, { encode: false }); 
+            const hmac = crypto.HmacSHA512(signData, secretKey);
+            const signed = hmac.toString(crypto.enc.Hex);
+            vnp_Params['vnp_SecureHash'] = signed;
+            vnpUrl += '?' + querystring.stringify(vnp_Params, { encode: false });
+            if(vnpUrl) {
+                sessionStorage.setItem('ticket', JSON.stringify(ticket))
+                sessionStorage.setItem('idShowTime', showTime._id)
+                
+                window.location = vnpUrl
+            }
+        } else {
+            setError("Chỗ ngồi đã được đặt, vui lòng chọn chỗ ngồi khác")
         }
+        
         
     }
     return (
@@ -134,6 +147,9 @@ function Payment ({setShowComponent, showTime, selectedFood, chooseSeat, sum}) {
                             <button onClick={() => setShowComponent(1)}>QUAY LẠI</button>
                             <button onClick={handlePayment}>THANH TOÁN</button>
                         </div>
+                    </li>
+                    <li>
+                        <p style={{color: "red"}}>{error}</p>
                     </li>
                 </ul>
             </div>

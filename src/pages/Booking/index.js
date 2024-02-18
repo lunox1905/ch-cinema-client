@@ -14,6 +14,7 @@ import { ShowTimeContext } from "../../contexts/ShowTimeContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import Auth from '../../components/Auth'
 import convertPrice from "../../utils/convertPrice";
+import { LOCAL_STORAGE_TOKEN_NAME } from "../../contexts/constants";
 const cx = classNames.bind(styles)
 var price = 0
 var time
@@ -21,7 +22,7 @@ function Booking () {
     const { movieState: {movies}} = useContext(MovieContext)
     const { getFoods } = useContext(FoodContext)
     const { cinemaState: { cinemas }} = useContext(CinemaContext)
-    const { authState: {user, isAuthenticated }} = useContext(AuthContext)
+    const { authState: {user, isAuthenticated }, loadUser} = useContext(AuthContext)
     const { getShowTime } = useContext(ShowTimeContext)
     const params = useParams()
     const [ showTime, setShowTime ] = useState(null)
@@ -33,8 +34,8 @@ function Booking () {
     const [ showComponent, setShowComponent ] = useState(0)
     const [ showLogin, setShowLogin ] = useState(false)
 
-    const movie = movies.find(movie => movie._id === showTime?.movie)
-    const cinema = cinemas.find(c => c._id === showTime?.cinema)
+    const movie = movies.find(movie => movie._id === showTime?.movieId)
+    const cinema = cinemas.find(c => c._id === showTime?.cinemaId)
     const sumFood = selectedFood.reduce(
         (accumulator, currentValue) => accumulator + currentValue.amount * foods.find(f => f._id === currentValue.id).price,
         0
@@ -55,10 +56,10 @@ function Booking () {
                         }
                     })
             })
-        if(!isAuthenticated) {
+        if(!localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
             setShowLogin(true)
         }
-    }, [])
+    }, [showComponent])
     const innerFood = (food, i) => {
         const f = foods.find(f => f._id === food?.id)
         if(food?.amount > 1) {
@@ -95,6 +96,8 @@ function Booking () {
                     chooseSeat={chooseSeat}
                     sum={sumFood + (numberOfSeat*price)}
                 />
+            default:
+                return
         }
     }
     if(loading) return <Loading/>

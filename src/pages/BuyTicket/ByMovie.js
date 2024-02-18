@@ -24,7 +24,7 @@ function ByMovie () {
     const showTimeFilter = []
     if(cinema && movie) {
         showTimes.forEach((item, index) => {
-            if(item.cinema._id === cinema) {
+            if(item.cinemaId._id === cinema) {
                 if(index === 0) {
                     showTimeFilter.push({
                         showTime: [{
@@ -88,7 +88,7 @@ function ByMovie () {
                     </div>
                     {
                         movie ? cinemas.map(c => {
-                            if(showTimes.find(s => s.cinema._id === c._id)) {
+                            if(showTimes.find(s => s.cinemaId._id === c._id)) {
                                 return (
                                     <li onClick={() => setCinema(c._id)}>{c.name}</li>
                                 )

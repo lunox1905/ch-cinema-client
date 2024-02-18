@@ -20,6 +20,7 @@ function EditMovie () {
         getMovie(params.slug)
             .then(res => {
                 if(res.success) {
+                    console.log(res)
                     setMovie(res.movie)
                     setLoading(false)
                 }
@@ -94,7 +95,7 @@ function EditMovie () {
                             <span>Thể loại</span>
                             <p>
                             {   
-                                movies.category.map((item, index) => {
+                                movies.categoryId.map((item, index) => {
                                     return index + 1 === movies.length ? item.title : item.title + ', ' 
                                 })  
                             }

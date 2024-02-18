@@ -48,7 +48,7 @@ function Home () {
                     <Breadcrumb.Item active>{movie?.title}</Breadcrumb.Item>
                 </Breadcrumb>
                 <Row>
-                    <Col lg='8'>
+                    <Col lg='8' sm='12'>
                         <Row>
                             <Col lg='4'>
                                 <div className={cx('image')}>
@@ -91,7 +91,7 @@ function Home () {
                             <ShowTime id={movie?._id}/>
                         </div>
                     </Col>
-                    <Col lg='4'>
+                    <Col lg='4' sm='12'>
                         <div className={cx('movie-other')}>
                             <div className={cx('container-other')}>
                                 <HeadingTitle title={'PHIM ĐANG CHIẾU'}/>

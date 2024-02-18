@@ -40,7 +40,6 @@ const AuthContextProvider = ({children}) => {
         try {
             const res = await axios.get(`http://${URL}/auth`)
             if(res.data.success) {  
-                console.log(res.data) 
                 dispatch({
                     type: 'SET_AUTH',
                     payload: { isAuthenticated: true, user: res.data.user}
@@ -67,7 +66,6 @@ const AuthContextProvider = ({children}) => {
             const response = await axios.post(`http://${URL}/login`, userForm)
             if(response.data.success){
                 localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, response.data.accessToken)
-                console.log('login')
                 loadUser()
             }
             return response.data
@@ -112,7 +110,7 @@ const AuthContextProvider = ({children}) => {
         window.location.reload()
     }
 
-    const AuthContextData = { loginUser, registerUser, authState, logoutUser, editPassWord }
+    const AuthContextData = { loginUser, registerUser, authState, logoutUser, editPassWord, loadUser }
     return (
         <AuthContext.Provider value={AuthContextData}>
             {children}

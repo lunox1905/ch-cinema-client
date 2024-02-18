@@ -17,7 +17,7 @@ function Header() {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('logo')}>
-                    <img src={require('../../assets/images/logo3.png')} alt='logo'></img>
+                    <img src="https://www.galaxycine.vn/_next/image/?url=%2F_next%2Fstatic%2Fmedia%2Fgalaxy-logo-mobile.074abeac.png&w=128&q=75" alt='logo'></img>
                 </div>
                 <div className={cx('search')}>
                     <form class="form-inline my-2 my-lg-0" action="/search">
@@ -36,7 +36,7 @@ function Header() {
                                         {user?.role === 'admin' ? (
                                             <>
                                                 <li>
-                                                    <Link to={'/profile'}>Tài khoản</Link> 
+                                                    <Link to={'/thanh-vien'}>Tài khoản</Link> 
                                                 </li>
                                                 <li>
                                                     <Link to={'/manager'}>Quản lý</Link>
@@ -44,7 +44,7 @@ function Header() {
                                             </>
                                         ) : (
                                             <li>
-                                                <Link to={'/profile'}>Tài khoản</Link>
+                                                <Link to={'/thanh-vien'}>Tài khoản</Link>
                                             </li>
                                         )}
                                         <li onClick={() => logoutUser()}>Thoát</li>
